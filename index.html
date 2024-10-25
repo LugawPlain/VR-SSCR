@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>VR SSCRDC</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <!--3d text-->
+    <!-- Environment -->
+    <script src="https://unpkg.com/aframe-environment-component@1.3.3/dist/aframe-environment-component.min.js"></script>
+    <!-- Extras and Controls -->
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.1/dist/aframe-extras.min.js"></script>
+    <!-- Super Hands -->
+    <script src="https://unpkg.com/super-hands@^3.0.4/dist/super-hands.min.js"></script>
+    <!-- Physics -->
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js"></script>
+    <!-- Event Set -->
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+    <!-- GUI -->
+    <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
+
+    <script>
+      AFRAME.registerComponent("last-hovered", {
+        init: function () {
+          this.el.addEventListener("mouseenter", () => {
+            this.el.setAttribute("material", { opacity: 0.5, wireframe: true });
+          });
+
+          this.el.addEventListener("mouseleave", () => {
+            if (!this.el.hasAttribute("active")) {
+              this.el.setAttribute("material", "opacity", 0);
+            }
+          });
+        },
+      });
+      let lastClickedEl = null;
+      AFRAME.registerComponent("last-clicked", {
+        schema: {
+          active: { type: "boolean", default: false },
+        },
+        init: function () {
+          this.el.addEventListener("click", () => {
+            if (this.data.active) {
+              return;
+            }
+
+            if (lastClickedEl) {
+              lastClickedEl.setAttribute("material", {
+                color: "white",
+                opacity: 0,
+                wireframe: false,
+              });
+              lastClickedEl.removeAttribute("active");
+              lastClickedEl.components["last-clicked"].data.active = false;
+            }
+
+            lastClickedEl = this.el;
+
+            this.el.setAttribute("material", {
+              color: "yellow",
+              opacity: 0.4,
+              wireframe: true,
+            });
+            this.data.active = true;
+            this.el.setAttribute("active", true);
+            console.log(lastClickedEl);
+          });
+        },
+      });
+      AFRAME.registerComponent("flex-container", {
+        schema: {
+          childPositions: { type: Object, default: null },
+        },
+        init: function () {},
+      });
+    </script>
+  </head>
+  <body>
+    <a-scene id="scene" physics="gravity: -9.8">
+      <!-- Camera -->
+      <a-camera position="0 1.2 1">
+        <!-- Cursor -->
+        <a-cursor
+          raycaster="objects: .grably"
+          position="0 0 -0.2"
+          scale="0.2 0.2 0.2"
+          super-hands="colliderEvent: raycaster-intersection;
+          colliderEventProperty: els;
+          colliderEndEvent:raycaster-intersection-cleared;
+          colliderEndEventProperty: clearedEls;"
+          static-body="shape: sphere; sphereRadius: 0.001"
+        ></a-cursor>
+      </a-camera>
+
+      <!-- Assests -->
+      <a-assets>
+        <a-mixin id="blue" material="color: blue"></a-mixin>
+        <a-mixin id="black" material="color: black"></a-mixin>
+        <a-mixin id="red" material="color: red"></a-mixin>
+        <a-mixin id="yellow" material="color: yellow"></a-mixin>
+      </a-assets>
+
+      <!-- Environment -->
+
+      <a-entity environment="preset:japan   ;gridColor:#6b6b6b"></a-entity>
+
+      <!-- Gui Menu -->
+      <a-plane
+        flex-container
+        position="-2 5 -5"
+        material="color:black;opacity:0.5"
+        height="5"
+        width="3"
+      >
+        <a-text value="Hello"> </a-text>
+      </a-plane>
+      <!-- Table -->
+      <a-box
+        position="0 0.7 -3"
+        height="0.2"
+        width="6"
+        depth="5"
+        material="color:gray;"
+        rotation="5 0 0"
+        static-body
+      >
+      </a-box>
+
+      <!-- Logic Gate Object -->
+      <a-entity
+        last-clicked
+        last-hovered
+        class="grably"
+        dynamic-body
+        position="0.5 2 -1"
+        grabbable
+        material="color:white;opacity:0"
+        geometry="primitive:box;height:0.2;width:0.5;depth:0.2"
+      >
+        <a-text position="-0.3 0.2 0" value="Hello" color="blue"></a-text>
+        <a-entity position="0 0 0" scale="0.1 0.1 0.1" rotation="90 0 0">
+          <a-cylinder
+            light="type:ambient;intensity:0"
+            mixin="blue"
+            position="-2 0.5 0"
+            radius="0.5"
+            rotation="90 0 0"
+          ></a-cylinder>
+          <a-cylinder
+            mixin="black"
+            position="-2 -0.5 0"
+            radius="0.5"
+            rotation="90 0 0"
+          ></a-cylinder>
+          <a-box mixin="red" position="0 0 0" height="2" width="3"></a-box>
+          <a-cylinder
+            mixin="yellow"
+            position="2 0 0"
+            radius="0.5"
+            rotation="90 0 0"
+          ></a-cylinder>
+        </a-entity>
+      </a-entity>
+
+      <a-entity
+        last-clicked
+        last-hovered
+        class="grably"
+        dynamic-body
+        position="0 2 -1"
+        grabbable
+        material="color:white;opacity:0"
+        geometry="primitive:box;height:0.2;width:0.5;depth:0.2"
+      >
+        <a-text position="-0.3 0.2 0" value="Hello" color="blue"></a-text>
+        <a-entity position="0 0 0" scale="0.1 0.1 0.1" rotation="90 0 0">
+          <a-cylinder
+            light="type:ambient;intensity:0"
+            mixin="blue"
+            position="-2 0.5 0"
+            radius="0.5"
+            rotation="90 0 0"
+          ></a-cylinder>
+          <a-cylinder
+            mixin="black"
+            position="-2 -0.5 0"
+            radius="0.5"
+            rotation="90 0 0"
+          ></a-cylinder>
+          <a-box mixin="red" position="0 0 0" height="2" width="3"></a-box>
+          <a-cylinder
+            mixin="yellow"
+            position="2 0 0"
+            radius="0.5"
+            rotation="90 0 0"
+          ></a-cylinder>
+        </a-entity>
+      </a-entity>
+
+      <a-entity
+        last-clicked
+        last-hovered
+        class="grably"
+        dynamic-body
+        position="2 2 -1"
+        grabbable
+        material="color:white;opacity:0"
+        geometry="primitive:box;height:0.2;width:0.5;depth:0.2"
+      >
+        <a-text position="-0.3 0.2 0" value="Hello" color="blue"></a-text>
+        <a-entity position="0 0 0" scale="0.1 0.1 0.1" rotation="90 0 0">
+          <a-cylinder
+            light="type:ambient;intensity:0"
+            mixin="blue"
+            position="-2 0.5 0"
+            radius="0.5"
+            rotation="90 0 0"
+          ></a-cylinder>
+          <a-cylinder
+            mixin="black"
+            position="-2 -0.5 0"
+            radius="0.5"
+            rotation="90 0 0"
+          ></a-cylinder>
+          <a-box mixin="red" position="0 0 0" height="2" width="3"></a-box>
+          <a-cylinder
+            mixin="yellow"
+            position="2 0 0"
+            radius="0.5"
+            rotation="90 0 0"
+          ></a-cylinder>
+        </a-entity>
+      </a-entity>
+      <!-- Floor -->
+      <a-plane
+        position="0 0.1 -4"
+        rotation="-90 0 0"
+        width="20"
+        height="20"
+        material="opacity:0.1"
+        static-body
+      ></a-plane>
+    </a-scene>
+  </body>
+</html>

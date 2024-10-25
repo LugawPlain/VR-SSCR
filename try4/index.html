@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>VR SSCRDC</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <!--3d text-->
+    <!-- Environment -->
+    <script src="https://unpkg.com/aframe-environment-component@1.3.3/dist/aframe-environment-component.min.js"></script>
+
+    <!-- Extras and Controls -->
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.1/dist/aframe-extras.min.js"></script>
+    <!-- Super Hands -->
+    <script src="https://unpkg.com/super-hands@^3.0.4/dist/super-hands.min.js"></script>
+    <!-- Physics -->
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js"></script>
+    <!-- Event Set -->
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script>
+      // AFRAME.registerComponent("clickable", {
+      //   schema: {
+      //     color: { type: "color", default: "#000000" },
+      //     scaleMultiplier: { type: "number", default: 1.2 },
+      //   },
+
+      //   init: function () {
+      //     console.log(this.el);
+      //     const outline = document.createElement("a-entity");
+
+      //     outline.setAttribute("geometry", this.el.getAttribute("geometry"));
+      //     outline.setAttribute("material", {
+      //       color: this.data.color,
+      //       wireframe: true,
+      //       opacity: 1,
+      //       visible: false,
+      //     });
+
+      //     outline.object3D.scale.multiplyScalar(this.data.scaleMultiplier);
+
+      //     this.el.appendChild(outline);
+      //     this.outline = outline;
+      //     outline.setAttribute("visible", true);
+      //     this.el.addEventListener("mouseenter", () => {
+      //       const position = this.el.getAttribute("position");
+      //       const materialColor = this.el.getAttribute("material").color;
+
+      //       console.log(
+      //         "Mouse-Enter - Position: " +
+      //           `(${position.x}, ${position.y}, ${position.z})` +
+      //           ", Color: " +
+      //           materialColor
+      //       );
+      //       this.outline.setAttribute("visible", true);
+      //     });
+
+      //     this.el.addEventListener("mouseleave", () => {
+      //       const position = this.el.getAttribute("position");
+      //       const materialColor = this.el.getAttribute("material").color;
+
+      //       console.log(
+      //         "Mouse-Enter - Position: " +
+      //           `(${position.x}, ${position.y}, ${position.z})` +
+      //           ", Color: " +
+      //           materialColor
+      //       );
+      //       this.outline.setAttribute("visible", false);
+      //     });
+      //   },
+      // });
+      AFRAME.registerComponent("multiply", {
+        init: function () {
+          this.el.addEventListener("click", () => {
+            console.log("clicked");
+            this.createClone();
+          });
+        },
+
+        createClone: function () {
+          const clone = document.createElement("a-entity");
+          const cloneEntity = this.el;
+          console.log(cloneEntity);
+
+          const position = cloneEntity.getAttribute("position");
+
+          const cloneCount = this.el.children.length;
+
+          const newPosition = {
+            x: 0,
+            y: 0.1 + (cloneCount * 0.1 + (1 + cloneCount)),
+            z: 0,
+          };
+
+          clone.setAttribute("position", newPosition);
+
+          const material = cloneEntity.getAttribute("material");
+          clone.setAttribute("material", material);
+
+          const geometry = cloneEntity.getAttribute("geometry");
+          clone.setAttribute("geometry", geometry);
+
+          clone.removeAttribute("multiply");
+          this.el.appendChild(clone);
+        },
+      });
+    </script>
+  </head>
+  <body>
+    <a-scene
+      id="scene"
+      physics="debug:true ;gravity: -9.8 "
+      obb-collider="showColliders: true"
+    >
+      <!-- Assets -->
+      <a-assets>
+        <!-- Color assests -->
+        <a-mixin id="blue" material="color: blue"></a-mixin>
+        <a-mixin id="black" material="color: black"></a-mixin>
+        <a-mixin id="red" material="color: red"></a-mixin>
+        <a-mixin id="yellow" material="color: yellow"></a-mixin>
+
+        <a-mixin
+          id="physics-hands"
+          physics-collider
+          phase-shift
+          collision-filter="collisionForces: false"
+          static-body="shape: sphere; sphereRadius: 0.02"
+          super-hands="colliderEvent: collisions;
+                              colliderEventProperty: els;
+                              colliderEndEvent: collisions;
+                              colliderEndEventProperty: clearedEls;"
+        ></a-mixin>
+      </a-assets>
+
+      <!-- Camera  -->
+      <a-camera
+        position="0 1 1"
+        raycaster="objects: .cube"
+        super-hands="colliderEvent: raycaster-intersection;
+                             colliderEventProperty: els;
+                             colliderEndEvent:raycaster-intersection-cleared;
+                             colliderEndEventProperty: clearedEls;"
+        static-body="shape: sphere; sphereRadius: 0.001"
+      >
+        <a-cursor></a-cursor>
+      </a-camera>
+      <!-- Hover Box -->
+      <a-box
+        class="cube"
+        grabbable
+        position="-1 0.5 -3"
+        rotation="0 45 0"
+        color="#4CC3D9"
+        event-set__enter="_event: mouseenter; color: #8FF7FF"
+        event-set__leave="_event: mouseleave; color: #4CC3D9"
+      ></a-box>
+
+      <a-entity
+        multiply
+        position="2 1 -2"
+        geometry="primitive: box"
+        material="color: blue"
+      >
+      </a-entity>
+
+      <!-- Box going up slant -->
+      <a-box
+        position="-1 1.6 -5"
+        animation="property: position; to: 1 8 -10; dur: 2000; easing: linear; loop: true"
+        color="tomato"
+      ></a-box>
+      <!-- Sphere Revolution -->
+      <a-entity
+        rotation="0 0 0"
+        animation="property: rotation; to: 0 360 0; loop: true; dur: 10000"
+      >
+        <a-sphere position="5 0 0" color="mediumseagreen"></a-sphere>
+      </a-entity>
+      <!-- Dyamic Box -->
+
+      <!-- Hover Box animaton -->
+      <a-entity
+        position="0 2 -3"
+        geometry="primitive: box"
+        material="color: red"
+        animation__mouseenter="property: components.material.material.color; type: color; to: blue; startEvents: mouseenter; dur: 500"
+        ;
+        animation__mouseleave="property: components.material.material.color; type: color; to: red; startEvents: mouseleave; dur: 500"
+        ;
+      >
+      </a-entity>
+      <!-- Floor Plane -->
+      <a-plane
+        static-body
+        position="0 -1 -2"
+        scale="15 15 15"
+        rotation="90 0 0"
+      >
+      </a-plane>
+    </a-scene>
+  </body>
+</html>
