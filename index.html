@@ -67,8 +67,10 @@
 
       <!-- Assests -->
       <a-assets>
-        <a-asset-item id="NOT_GATE" src="assests/NOT_GATE.glb"> </a-asset-item>
-        <a-asset-item id="LGPlate" src="assests/LGPlate.glb"> </a-asset-item>
+        <!-- <a-asset-item id="NOT_GATE" src="assests/NOT_GATE.glb"> </a-asset-item>
+        <a-asset-item id="LGPlate" src="assests/LGPlate.glb"> </a-asset-item> -->
+        <a-asset-item id="LGPlate" src="assests/AND_GATE_PLATE.glb">
+        </a-asset-item>
 
         <a-mixin
           id="xs-cube"
@@ -76,7 +78,7 @@
         ></a-mixin>
         <a-mixin
           id="sm-cube"
-          geometry="width:0.7;height:0.7;depth:0.7"
+          geometry="width:0.4;height:0.4;depth:0.4"
         ></a-mixin>
         <a-mixin
           id="md-cube"
@@ -108,13 +110,59 @@
         height="4"
         width="6"
       >
-        <a-entity position="0 0 1">
+        <a-entity position="0 1 0">
+          <a-text value="Rotate" position="-0.3 0.6 0.0"></a-text>
+          <a-text value="X" position="-0.6 0.3 0"></a-text>
+          <a-box
+            class="interactable"
+            position="-0.5 0 0.05"
+            last-hovered
+            mixin="xs-cube"
+            color="white"
+          ></a-box>
+          <a-text value="Y" position="-0.1 0.3 0"></a-text>
           <a-box
             class="interactable"
             position="0 0 0.05"
             last-hovered
             mixin="xs-cube"
             color="white"
+          ></a-box>
+          <a-text value="Z" position="0.4 0.3 0"></a-text>
+          <a-box
+            class="interactable"
+            position="0.5 0 0.05"
+            last-hovered
+            mixin="xs-cube"
+            color="white"
+          ></a-box>
+        </a-entity>
+        <a-entity position="0 0 0">
+          <a-text value="Add Logic Gates" position="-0.8 0.6 0.0"></a-text>
+
+          <a-box
+            class="interactable"
+            position="-0.75 0 0.05"
+            last-hovered
+            mixin="sm-cube"
+            color="white"
+            ><a-text value="NOT" position="-0.25 0 0.2"></a-text
+          ></a-box>
+          <a-box
+            class="interactable"
+            position="0 0 0.05"
+            last-hovered
+            mixin="sm-cube"
+            color="white"
+            ><a-text value="OR" position="-0.17 0 0.2"></a-text
+          ></a-box>
+          <a-box
+            class="interactable"
+            position="0.75 0 0.05"
+            last-hovered
+            mixin="sm-cube"
+            color="white"
+            ><a-text value="AND" position="-0.25 0 0.2"></a-text
           ></a-box>
         </a-entity>
       </a-plane>
@@ -141,15 +189,16 @@
         position="0 1 -1"
         grabbable
         material="color: white; opacity: 0.2; wireframe: true;"
-        depth="0.15"
+        depth="0.1"
         height="0.25"
-        width="0.55"
+        width="0.7"
         rotation="-90 0 0"
       >
         <a-text
           position="-0.150 0.05 0.06"
           value="NOT gate"
-          color="blue"
+          color="yellow
+          "
           scale="0.3 0.3 0.3"
         ></a-text>
         <a-gltf-model
@@ -164,79 +213,6 @@
           scale="0.008 0.008 0.008"
           rotation="90 0 0"
         ></a-gltf-model>
-
-        <!-- <a-entity position="0 0 0" scale="0.1 0.1 0.05" rotation="0 0 0">
-          <a-cylinder
-            light="type:ambient;intensity:0"
-            color="blue"
-            position="-2.3 0.5 0"
-            radius="0.5"
-            rotation="90 0 0"
-            open-ended="true"
-            side="double"
-            theta-length="180"
-          ></a-cylinder>
-          <a-cylinder
-            color="black"
-            position="-2.3 -0.5 0"
-            radius="0.5"
-            rotation="90 0 0"
-            open-ended="true"
-            side="double"
-            theta-length="180"
-          ></a-cylinder>
-          <a-box
-            color="red"
-            position="0 0 0"
-            height="2"
-            width="3.5"
-            depth="1"
-          ></a-box>
-          <a-cylinder
-            color="yellow"
-            position="2 0 0"
-            radius="0.5"
-            rotation="90 0 0"
-            height="0.99"
-          ></a-cylinder>
-        </a-entity> -->
-      </a-box>
-
-      <a-box
-        last-clicked-lg
-        last-hovered-lg
-        class="interactable"
-        dynamic-body
-        position="2 2 -1"
-        grabbable
-        material="color:white;opacity:0;wireframe:true"
-        depth="0.3"
-        height="0.2"
-        width="0.5"
-      >
-        <a-text position="-0.3 0.2 0" value="3" color="blue"></a-text>
-        <a-entity position="0 0 0" scale="0.1 0.1 0.1" rotation="0 0 0">
-          <a-cylinder
-            light="type:ambient;intensity:0"
-            color="blue"
-            position="-2 0.5 0"
-            radius="0.5"
-            rotation="90 0 0"
-          ></a-cylinder>
-          <a-cylinder
-            color="black"
-            position="-2 -0.5 0"
-            radius="0.5"
-            rotation="90 0 0"
-          ></a-cylinder>
-          <a-box color="red" position="0 0 0" height="2" width="3"></a-box>
-          <a-cylinder
-            color="yellow"
-            position="2 0 0"
-            radius="0.5"
-            rotation="90 0 0"
-          ></a-cylinder>
-        </a-entity>
       </a-box>
       <!-- Floor -->
       <a-plane
