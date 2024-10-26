@@ -69,7 +69,7 @@
       <a-assets>
         <!-- <a-asset-item id="NOT_GATE" src="assests/NOT_GATE.glb"> </a-asset-item>
         <a-asset-item id="LGPlate" src="assests/LGPlate.glb"> </a-asset-item> -->
-        <a-asset-item id="LGPlate" src="assests/AND_GATE_PLATE.glb">
+        <a-asset-item id="AND_GATE_PLATE" src="assests/AND_GATE_PLATE.glb">
         </a-asset-item>
 
         <a-mixin
@@ -194,23 +194,10 @@
         width="0.7"
         rotation="-90 0 0"
       >
-        <a-text
-          position="-0.150 0.05 0.06"
-          value="NOT gate"
-          color="yellow
-          "
-          scale="0.3 0.3 0.3"
-        ></a-text>
         <a-gltf-model
           position="-0.1 0 0.05"
-          src="#NOT_GATE"
+          src="#AND_GATE_PLATE"
           scale="0.02 0.02 0.02"
-          rotation="90 0 0"
-        ></a-gltf-model>
-        <a-gltf-model
-          position="-0.33 0.1 0"
-          src="#LGPlate"
-          scale="0.008 0.008 0.008"
           rotation="90 0 0"
         ></a-gltf-model>
       </a-box>
