@@ -1,4 +1,4 @@
-AFRAME.registerComponent("last-hovered", {
+AFRAME.registerComponent("selection", {
   init: function () {
     this.isMouseDown = false;
     this.isMouseEnter = false;
@@ -13,11 +13,14 @@ AFRAME.registerComponent("last-hovered", {
       }
     });
 
-    this.el.addEventListener("mousedown", () => {
+    this.el.addEventListener("mousedown", (event) => {
+      if (event.detail && event.detail.cursorEl) {
+        return;
+      }
+
       this.isMouseDown = true;
       this.el.setAttribute("material", { opacity: 0.8, color: "red" });
 
-      console.log(this.originalPosition);
       this.el.setAttribute("animation", {
         property: "position",
         from: `${this.originalPosition.x} ${this.originalPosition.y} ${this.originalPosition.z}`,
@@ -49,7 +52,6 @@ AFRAME.registerComponent("last-hovered", {
         dur: 200,
         easing: "easeOutQuad",
       });
-      console.log(this.originalPosition);
       if (!this.isMouseEnter) {
         this.el.setAttribute("material", { opacity: 0.8, color: "white" });
       }

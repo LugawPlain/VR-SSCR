@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-
 <html>
   <head>
     <meta charset="utf-8" />
@@ -24,28 +22,13 @@
     <!-- Bounding Box -->
     <script src="https://unpkg.com/aframe-bounding-box-component"></script>
     <script src="last-hovered-lg.js"></script>
-    <script src="last-hovered.js"></script>
+    <script src="selection.js"></script>
     <script src="last-clicked-lg.js"></script>
     <script src="container-box.js"></script>
     <script src="auto-box.js"></script>
-    <script>
-      AFRAME.registerComponent("log", {
-        init: function () {
-          this.el.addEventListener("model-loaded", () => {
-            const obj = this.el.getObject3D("mesh");
-            if (!obj) return;
-
-            obj.traverse((node) => {
-              console.log(node.material);
-              if (node.isMesh && node.material) {
-                // Modify material properties
-                node.material.emissiveIntensity = this.data.emissiveIntensity;
-              }
-            });
-          });
-        },
-      });
-    </script>
+    <script src="add-button.js"></script>
+    <!-- <script src="rotate-button.js"></script> -->
+    <script src="toggle.js"></script>
   </head>
   <body>
     <a-scene id="scene" physics="gravity: -9.8">
@@ -70,6 +53,15 @@
         <!-- <a-asset-item id="NOT_GATE" src="assests/NOT_GATE.glb"> </a-asset-item>
         <a-asset-item id="LGPlate" src="assests/LGPlate.glb"> </a-asset-item> -->
         <a-asset-item id="AND_GATE_PLATE" src="assests/AND_GATE_PLATE.glb">
+        </a-asset-item>
+
+        <a-asset-item id="NOT_GATE_PLATE" src="assests/NOT_GATE_PLATE.glb">
+        </a-asset-item>
+
+        <a-asset-item id="OR_GATE_PLATE" src="assests/OR_GATE_PLATE.glb">
+        </a-asset-item>
+
+        <a-asset-item id="XOR_GATE_PLATE" src="assests/XOR_GATE_PLATE.glb">
         </a-asset-item>
 
         <a-mixin
@@ -105,65 +97,57 @@
       <!-- Gui Menu -->
 
       <a-plane
-        position="0 3 -5.5"
-        material="color:black;opacity:0.9"
+        position="0 2.7 -5.5"
+        material="color:black;opacity:1"
         height="4"
         width="6"
       >
-        <a-entity position="0 1 0">
-          <a-text value="Rotate" position="-0.3 0.6 0.0"></a-text>
-          <a-text value="X" position="-0.6 0.3 0"></a-text>
-          <a-box
-            class="interactable"
-            position="-0.5 0 0.05"
-            last-hovered
-            mixin="xs-cube"
-            color="white"
-          ></a-box>
-          <a-text value="Y" position="-0.1 0.3 0"></a-text>
-          <a-box
-            class="interactable"
-            position="0 0 0.05"
-            last-hovered
-            mixin="xs-cube"
-            color="white"
-          ></a-box>
-          <a-text value="Z" position="0.4 0.3 0"></a-text>
-          <a-box
-            class="interactable"
-            position="0.5 0 0.05"
-            last-hovered
-            mixin="xs-cube"
-            color="white"
-          ></a-box>
-        </a-entity>
+        <!--  -->
         <a-entity position="0 0 0">
           <a-text value="Add Logic Gates" position="-0.8 0.6 0.0"></a-text>
 
           <a-box
+            add-button
             class="interactable"
-            position="-0.75 0 0.05"
-            last-hovered
+            position="-1.2 0 0.05"
+            selection
             mixin="sm-cube"
             color="white"
             ><a-text value="NOT" position="-0.25 0 0.2"></a-text
           ></a-box>
           <a-box
+            add-button
             class="interactable"
-            position="0 0 0.05"
-            last-hovered
+            position=" -0.4 0  0.05"
+            selection
             mixin="sm-cube"
             color="white"
             ><a-text value="OR" position="-0.17 0 0.2"></a-text
           ></a-box>
           <a-box
+            add-button
             class="interactable"
-            position="0.75 0 0.05"
-            last-hovered
+            position="0.4 0 0.05"
+            selection
             mixin="sm-cube"
             color="white"
             ><a-text value="AND" position="-0.25 0 0.2"></a-text
           ></a-box>
+          <a-box
+            add-button
+            class="interactable"
+            position="1.2 0 0.05"
+            selection
+            mixin="sm-cube"
+            color="white"
+            ><a-text value="XOR" position="-0.25 0 0.2"></a-text
+          ></a-box>
+        </a-entity>
+
+        <!--  -->
+        <a-entity position="-0.5 -1 0 ">
+          <a-text value="Edit Mode"> </a-text>
+          <a-box mixin="xs-cube" toggle position="0.5 -0.5 0.05" toggle></a-box>
         </a-entity>
       </a-plane>
 
@@ -174,33 +158,14 @@
         width="6"
         depth="5"
         material="color:gray;"
-        rotation="5 0 0"
+        rotation="2 0 0"
         static-body
       >
       </a-box>
 
       <!-- Logic Gate Object -->
+      <!-- XOR -->
 
-      <a-box
-        last-clicked-lg
-        last-hovered-lg
-        class="interactable"
-        dynamic-body
-        position="0 1 -1"
-        grabbable
-        material="color: white; opacity: 0.2; wireframe: true;"
-        depth="0.1"
-        height="0.25"
-        width="0.7"
-        rotation="-90 0 0"
-      >
-        <a-gltf-model
-          position="-0.1 0 0.05"
-          src="#AND_GATE_PLATE"
-          scale="0.02 0.02 0.02"
-          rotation="90 0 0"
-        ></a-gltf-model>
-      </a-box>
       <!-- Floor -->
       <a-plane
         position="0 0.1 -4"

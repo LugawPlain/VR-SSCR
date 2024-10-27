@@ -8,10 +8,18 @@ AFRAME.registerComponent("last-clicked-lg", {
       wireframe: true,
     });
     this.el.addEventListener("click", (event) => {
-      if (this.data.active) {
+      if (event.detail && event.detail.cursorEl) {
         return;
       }
-      if (event.target !== this.el) console.log("log");
+      if (this.data.active) {
+        this.data.active = false;
+        lastClickedEl.setAttribute("material", {
+          color: "white",
+        });
+        lastClickedEl.removeAttribute("active");
+        return;
+      }
+
       if (lastClickedEl) {
         lastClickedEl.setAttribute("material", {
           color: "white",
