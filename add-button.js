@@ -9,8 +9,8 @@ AFRAME.registerComponent("add-button", {
 
       const gatePlate = `
         <a-box
+          id="gates"
           last-clicked-lg
-          last-hovered-lg
           class="interactable"
           dynamic-body
           grabbable

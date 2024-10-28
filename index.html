@@ -28,7 +28,7 @@
     <script src="auto-box.js"></script>
     <script src="add-button.js"></script>
     <!-- <script src="rotate-button.js"></script> -->
-    <script src="toggle.js"></script>
+    <script src="edit-toggle.js"></script>
   </head>
   <body>
     <a-scene id="scene" physics="gravity: -9.8">
@@ -144,10 +144,16 @@
           ></a-box>
         </a-entity>
 
-        <!--  -->
-        <a-entity position="-0.5 -1 0 ">
-          <a-text value="Edit Mode"> </a-text>
-          <a-box mixin="xs-cube" toggle position="0.5 -0.5 0.05" toggle></a-box>
+        <a-entity position="-0 -0.5 0 ">
+          <a-box
+            mixin="xs-cube"
+            class="interactable"
+            position="0 -0.5 0.05"
+            edit-toggle
+          >
+            ></a-box
+          >
+          <a-text value="Edit Mode" position="-0.5 -0.1 0"> </a-text>
         </a-entity>
       </a-plane>
 
