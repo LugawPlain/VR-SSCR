@@ -5,7 +5,7 @@
     <title>VR SSCRDC</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <!--3d text-->
     <!-- Environment -->
     <script src="https://unpkg.com/aframe-environment-component@1.3.3/dist/aframe-environment-component.min.js"></script>
@@ -21,7 +21,6 @@
     <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
     <!-- Bounding Box -->
     <script src="https://unpkg.com/aframe-bounding-box-component"></script>
-    <script src="last-hovered-lg.js"></script>
     <script src="selection.js"></script>
     <script src="last-clicked-lg.js"></script>
     <script src="container-box.js"></script>
@@ -29,6 +28,9 @@
     <script src="add-button.js"></script>
     <!-- <script src="rotate-button.js"></script> -->
     <script src="edit-toggle.js"></script>
+    <script src="last-clicked-node.js"></script>
+    <script src="transmit-node.js"></script>
+    <script src="recieve-node.js"></script>
   </head>
   <body>
     <a-scene id="scene" physics="gravity: -9.8">
@@ -146,6 +148,7 @@
 
         <a-entity position="-0 -0.5 0 ">
           <a-box
+            grabDropEndButtons
             mixin="xs-cube"
             class="interactable"
             position="0 -0.5 0.05"
@@ -170,6 +173,67 @@
       </a-box>
 
       <!-- Logic Gate Object -->
+      <a-box
+        id="gates"
+        last-clicked-lg
+        class="interactable"
+        dynamic-body
+        grabbable="suppressY:true"
+        material="color: white; opacity: 0.2; wireframe: true;"
+        depth="0.05"
+        height="0.3"
+        width="0.6"
+        rotation="-90 0 0"
+        position="0 1 -1"
+      >
+        <a-gltf-model
+          position="-0.3 -0.15 0"
+          src="#XOR_GATE_PLATE"
+          scale="0.02 0.02 0.04"
+          rotation="0 0 0"
+          material="color:red"
+        ></a-gltf-model>
+        <a-text
+          value="XOR"
+          color="yellow"
+          scale="0.5 0.5 0.5"
+          rotation="0 0 0"
+          position="-0.16 0 0"
+        ></a-text>
+        <a-box
+          last-clicked-node
+          recieve-node
+          id="nodes"
+          color="white"
+          scale="0.07 0.07 0.07"
+          wireframe="true"
+          position="-0.3 0.08 -0.02"
+        >
+          <a-sphere color="red" scale="0.45 0.45 0.45"></a-sphere>
+        </a-box>
+        <a-box
+          last-clicked-node
+          recieve-node
+          id="nodes"
+          color="white"
+          scale="0.07 0.07 0.07"
+          wireframe="true"
+          position="-0.3 -0.08 -0.02"
+        >
+          <a-sphere color="red" scale="0.45 0.45 0.45"></a-sphere>
+        </a-box>
+        <a-box
+          last-clicked-node
+          transmit-node
+          id="nodes"
+          color="white"
+          scale="0.07 0.07 0.07"
+          wireframe="true"
+          position="0.25 -0 -0.02"
+        >
+          <a-sphere color="blue" scale="0.45 0.45 0.45"></a-sphere>
+        </a-box>
+      </a-box>
       <!-- XOR -->
 
       <!-- Floor -->

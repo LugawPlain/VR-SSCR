@@ -69,13 +69,20 @@ AFRAME.registerComponent("edit-toggle", {
 function setToggle(toggle) {
   this.sceneEl = document.querySelector("a-scene");
   const gates = this.sceneEl.querySelectorAll("#gates");
+  const nodes = this.sceneEl.querySelectorAll("#nodes");
   if (toggle) {
     gates.forEach((entity) => {
       entity.setAttribute("last-clicked-lg", { setEdit: true, active: false });
     });
+    nodes.forEach((entity) => {
+      entity.setAttribute("last-clicked-node", { setEdit: true });
+    });
   } else {
     gates.forEach((entity) => {
       entity.setAttribute("last-clicked-lg", { setEdit: false });
+    });
+    nodes.forEach((entity) => {
+      entity.setAttribute("last-clicked-node", { setEdit: false });
     });
   }
 }

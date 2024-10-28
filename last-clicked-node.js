@@ -1,18 +1,16 @@
-let lastClickedEl = null;
-
-AFRAME.registerComponent("last-clicked-lg", {
+AFRAME.registerComponent("last-clicked-node", {
   schema: {
-    active: { type: "boolean", default: false },
     setEdit: {
       type: "boolean",
       default: false,
     },
   },
   init: function () {
-    this.el.setAttribute("material", "opacity", 0);
-    this.el.setAttribute("material", {
-      wireframe: true,
-    });
+    if (!this.data.setEdit) {
+      this.el.setAttribute("material", {
+        opacity: 0,
+      });
+    }
     this.onMouseEnter = this.onMouseEnter.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
     this.onClick = this.onClick.bind(this);
@@ -23,11 +21,13 @@ AFRAME.registerComponent("last-clicked-lg", {
   },
   onMouseEnter: function () {
     this.el.setAttribute("material", "opacity", 0.4);
+    console.log(this.el);
   },
 
   onMouseLeave: function () {
     if (!this.el.hasAttribute("active")) {
       this.el.setAttribute("material", { opacity: 0 });
+      console.log("hello");
     }
   },
 
@@ -54,36 +54,10 @@ AFRAME.registerComponent("last-clicked-lg", {
     this.data.active = true;
     this.el.setAttribute("active", true);
   },
-
   update: function (oldData) {
     if (this.data.setEdit) {
-      this.el.setAttribute("material", { color: "white", opacity: 0 });
-      this.el.removeAttribute("active");
-      this.el.removeAttribute("interactable");
-      this.removeListeners();
-      const grabbable = this.el.components.grabbable;
-
-      if (grabbable) {
-        // Disable grabbing by clearing grabbers and setting grabbed to false
-        grabbable.grabbed = false;
-        grabbable.grabbers = [];
-        grabbable.grabber = null;
-        console.log("events remove");
-      }
-    } else {
+      this.el.setAttribute("material", {});
       this.el.classList.add("interactable");
-      this.el.addEventListener("mouseenter", this.onMouseEnter);
-      this.el.addEventListener("mouseleave", this.onMouseLeave);
-      this.el.addEventListener("click", this.onClick);
     }
-  },
-
-  removeListeners: function () {
-    this.el.removeEventListener("mouseenter", this.onMouseEnter);
-    this.el.removeEventListener("mouseleave", this.onMouseLeave);
-    this.el.removeEventListener("click", this.onClick);
-  },
-  remove: function () {
-    this.removeListeners();
   },
 });
