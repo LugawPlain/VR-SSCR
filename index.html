@@ -14,7 +14,7 @@
     <!-- Super Hands -->
     <script src="https://unpkg.com/super-hands@^3.0.4/dist/super-hands.min.js"></script>
     <!-- Physics -->
-    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.1.0/dist/aframe-physics-system.min.js"></script>
     <!-- Event Set -->
     <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
     <!-- GUI -->
@@ -38,7 +38,7 @@
       <a-camera position="0 1.2 1">
         <!-- Cursor -->
         <a-cursor
-          raycaster="objects: .interactable"
+          raycaster="showLine: true;objects: .interactable"
           position="0 0 -0.2"
           scale="0.15 0.15 0.15"
           super-hands="colliderEvent: raycaster-intersection;
@@ -178,7 +178,7 @@
         last-clicked-lg
         class="interactable"
         dynamic-body
-        grabbable="suppressY:true"
+        grabbable
         material="color: white; opacity: 0.2; wireframe: true;"
         depth="0.05"
         height="0.3"

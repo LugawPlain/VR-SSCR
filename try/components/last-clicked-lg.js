@@ -9,6 +9,7 @@ AFRAME.registerComponent("last-clicked-lg", {
     },
   },
   init: function () {
+    console.log("before", this.el);
     this.el.setAttribute("material", "opacity", 0);
     this.el.setAttribute("material", {
       wireframe: true,
@@ -16,10 +17,6 @@ AFRAME.registerComponent("last-clicked-lg", {
     this.onMouseEnter = this.onMouseEnter.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
     this.onClick = this.onClick.bind(this);
-
-    this.el.addEventListener("mouseenter", this.onMouseEnter);
-    this.el.addEventListener("mouseleave", this.onMouseLeave);
-    this.el.addEventListener("click", this.onClick);
   },
   onMouseEnter: function () {
     this.el.setAttribute("material", "opacity", 0.4);
@@ -59,17 +56,14 @@ AFRAME.registerComponent("last-clicked-lg", {
     if (this.data.setEdit) {
       this.el.setAttribute("material", { color: "white", opacity: 0 });
       this.el.removeAttribute("active");
-      this.el.removeAttribute("interactable");
+      this.el.classList.remove("interactable");
       this.removeListeners();
-      const grabbable = this.el.components.grabbable;
 
-      if (grabbable) {
-        // Disable grabbing by clearing grabbers and setting grabbed to false
-        grabbable.grabbed = false;
-        grabbable.grabbers = [];
-        grabbable.grabber = null;
-        console.log("events remove");
-      }
+      this.el.removeAttribute("grabbable");
+
+      console.log("after", this.el);
+
+      console.log("events remove");
     } else {
       this.el.classList.add("interactable");
       this.el.addEventListener("mouseenter", this.onMouseEnter);
