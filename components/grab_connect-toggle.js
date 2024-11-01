@@ -87,6 +87,12 @@ AFRAME.registerComponent("grab_connect-toggle", {
       });
       nodes.forEach((entity) => {
         entity.setAttribute("logic-node", { setToggle: true });
+        if (entity.hasAttribute("transmit-node")) {
+          entity.setAttribute("transmit-node", { setToggle: true });
+        }
+        if (entity.hasAttribute("recieve-node")) {
+          entity.setAttribute("recieve-node", { setToggle: true });
+        }
       });
     } else {
       gates.forEach((entity) => {
@@ -94,6 +100,12 @@ AFRAME.registerComponent("grab_connect-toggle", {
       });
       nodes.forEach((entity) => {
         entity.setAttribute("logic-node", { setToggle: false });
+        if (entity.hasAttribute("transmit-node")) {
+          entity.setAttribute("transmit-node", { setToggle: false });
+        }
+        if (entity.hasAttribute("recieve-node")) {
+          entity.setAttribute("recieve-node", { setToggle: false });
+        }
       });
     }
   },

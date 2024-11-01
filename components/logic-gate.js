@@ -9,7 +9,8 @@ AFRAME.registerComponent("logic-gate", {
     },
   },
   init: function () {
-    this.onClick = this.onClick.bind(this);
+    this.onHoverStart = this.onHoverStart.bind(this);
+    this.onHoverEnd = this.onHoverEnd.bind(this);
   },
 
   update: function (oldData) {
@@ -18,36 +19,31 @@ AFRAME.registerComponent("logic-gate", {
       this.el.setAttribute("material", { color: "white", opacity: 0 });
       this.el.classList.remove("interactable");
       this.el.removeAttribute("grabbable");
-      this.el.removeEventListener("click", this.onClick);
+      this.el.removeEventListener("hover-start", this.onHoverStart);
+      this.el.removeEventListener("hover-end", this.onHoverEnd);
     } else {
       this.el.classList.add("interactable");
       this.el.setAttribute("grabbable", {});
-      this.el.addEventListener("click", this.onClick);
+      this.el.addEventListener("hover-start", this.onHoverStart);
+      this.el.addEventListener("hover-end", this.onHoverEnd);
     }
   },
 
   remove: function () {
-    this.el.removeEventListener("click", this.onClick);
+    this.el.removeEventListener("hover-start", this.onHoverStart);
+    this.el.removeEventListener("hover-end", this.onHoverEnd);
   },
 
-  onClick: function (event) {
-    if (event.detail && event.detail.cursorEl) {
-      return;
-    }
-
-    if (this.data.active) {
-      this.data.active = false;
-      activeEl.setAttribute("material", { color: "white" });
-      return;
-    }
-
-    if (activeEl) {
-      activeEl.setAttribute("material", { color: "white", opacity: 0 });
-      activeEl.setAttribute("logic-gate", { active: false });
-    }
-
-    activeEl = this.el;
-    this.el.setAttribute("material", { color: "yellow", opacity: 0.4 });
-    this.data.active = true;
+  onHoverStart: function () {
+    this.el.setAttribute("material", {
+      color: "white",
+      opacity: 1,
+    });
+  },
+  onHoverEnd: function () {
+    this.el.setAttribute("material", {
+      color: "white",
+      opacity: 0,
+    });
   },
 });

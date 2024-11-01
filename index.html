@@ -185,8 +185,6 @@
         width="0.6"
         rotation="-90 0 0"
         position="0 1 -1"
-        event-set__hoveron="_event:hover-start; material.opacity:1;"
-        event-set__hoveroff="_event:hover-end; material.opacity:0;"
       >
         <a-gltf-model
           position="-0.3 -0.15 0"
@@ -203,7 +201,6 @@
           position="-0.16 0 0"
         ></a-text>
         <a-box
-          draggable
           droppable
           logic-node
           recieve-node
@@ -213,13 +210,10 @@
           wireframe="true"
           position="-0.3 0.08 -0.02"
           opacity="0"
-          event-set__dragon="_event: dragover-start; material.color: blue"
-          event-set__dragoff="_event: dragover-end; material.color: purple"
         >
           <a-sphere color="red" scale="0.45 0.45 0.45"></a-sphere>
         </a-box>
         <a-box
-          draggable
           droppable
           logic-node
           recieve-node
@@ -229,12 +223,11 @@
           wireframe="true"
           position="-0.3 -0.08 -0.02"
           opacity="0"
-          event-set__dragon="_event: dragover-start; material.color: blue"
-          event-set__dragoff="_event: dragover-end; material.color: purple"
         >
           <a-sphere color="red" scale="0.45 0.45 0.45"></a-sphere>
         </a-box>
         <a-box
+          hoverable
           draggable
           droppable
           logic-node
