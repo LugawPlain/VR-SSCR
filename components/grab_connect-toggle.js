@@ -1,4 +1,4 @@
-AFRAME.registerComponent("edit-toggle", {
+AFRAME.registerComponent("grab_connect-toggle", {
   schema: {
     toggle: { type: "boolean", default: false },
   },
@@ -44,7 +44,6 @@ AFRAME.registerComponent("edit-toggle", {
         } else {
           return;
         }
-        this.el.setAttribute("material", { opacity: 0.8, color: "orange" });
         if (this.data.toggle == true) {
           this.el.setAttribute("animation", {
             property: "position",
@@ -54,35 +53,48 @@ AFRAME.registerComponent("edit-toggle", {
             easing: "easeOutQuad",
           });
           this.data.toggle = false;
-          setToggle(this.data.toggle);
+          this.setToggle(this.data.toggle);
+          this.changeText(this.data.toggle);
         } else {
           this.data.toggle = true;
-          setToggle(this.data.toggle);
+          this.setToggle(this.data.toggle);
+          this.changeText(this.data.toggle);
         }
         if (!this.isMouseEnter) {
           this.el.setAttribute("material", { opacity: 0.8, color: "white" });
         }
+        this.el.setAttribute("material", { opacity: 0.8, color: "orange" });
       });
     });
   },
+  changeText: function (toggle) {
+    const textEntity = this.el.parentNode.querySelector("a-text");
+    if (toggle) {
+      textEntity.setAttribute("value", "Connect Mode");
+      textEntity.setAttribute("position", "-0.7 -0.1 0");
+    } else {
+      textEntity.setAttribute("value", "Grab Mode");
+      textEntity.setAttribute("position", "-0.5 -0.1 0");
+    }
+  },
+  setToggle: function (toggle) {
+    this.sceneEl = document.querySelector("a-scene");
+    const gates = this.sceneEl.querySelectorAll(".gates");
+    const nodes = this.sceneEl.querySelectorAll(".nodes");
+    if (toggle) {
+      gates.forEach((entity) => {
+        entity.setAttribute("logic-gate", { setToggle: true, active: false });
+      });
+      nodes.forEach((entity) => {
+        entity.setAttribute("logic-node", { setToggle: true });
+      });
+    } else {
+      gates.forEach((entity) => {
+        entity.setAttribute("logic-gate", { setToggle: false });
+      });
+      nodes.forEach((entity) => {
+        entity.setAttribute("logic-node", { setToggle: false });
+      });
+    }
+  },
 });
-function setToggle(toggle) {
-  this.sceneEl = document.querySelector("a-scene");
-  const gates = this.sceneEl.querySelectorAll("#gates");
-  const nodes = this.sceneEl.querySelectorAll("#nodes");
-  if (toggle) {
-    gates.forEach((entity) => {
-      entity.setAttribute("last-clicked-lg", { setEdit: true, active: false });
-    });
-    nodes.forEach((entity) => {
-      entity.setAttribute("last-clicked-node", { setEdit: true });
-    });
-  } else {
-    gates.forEach((entity) => {
-      entity.setAttribute("last-clicked-lg", { setEdit: false });
-    });
-    nodes.forEach((entity) => {
-      entity.setAttribute("last-clicked-node", { setEdit: false });
-    });
-  }
-}

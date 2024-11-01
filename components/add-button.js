@@ -9,7 +9,7 @@ AFRAME.registerComponent("add-button", {
       const notPlate = `
       <a-box
         id="gates"
-        last-clicked-lg
+        logic-gate
         class="interactable"
         dynamic-body
         grabbable
@@ -44,7 +44,7 @@ AFRAME.registerComponent("add-button", {
       const orPlate = `
       <a-box
         id="gates"
-        last-clicked-lg
+        logic-gate
         class="interactable"
         dynamic-body
         grabbable
@@ -83,7 +83,7 @@ AFRAME.registerComponent("add-button", {
       const andPlate = `
       <a-box
         id="gates"
-        last-clicked-lg
+        logic-gate
         class="interactable"
         dynamic-body
         grabbable
@@ -122,7 +122,7 @@ AFRAME.registerComponent("add-button", {
       const xorPlate = `
       <a-box
         id="gates"
-        last-clicked-lg
+        logic-gate
         class="interactable"
         dynamic-body
         grabbable

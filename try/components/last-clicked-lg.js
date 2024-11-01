@@ -9,7 +9,6 @@ AFRAME.registerComponent("last-clicked-lg", {
     },
   },
   init: function () {
-    console.log("before", this.el);
     this.el.setAttribute("material", "opacity", 0);
     this.el.setAttribute("material", {
       wireframe: true,
@@ -60,10 +59,6 @@ AFRAME.registerComponent("last-clicked-lg", {
       this.removeListeners();
 
       this.el.removeAttribute("grabbable");
-
-      console.log("after", this.el);
-
-      console.log("events remove");
     } else {
       this.el.classList.add("interactable");
       this.el.addEventListener("mouseenter", this.onMouseEnter);

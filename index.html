@@ -12,7 +12,7 @@
     <!-- Extras and Controls -->
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.1/dist/aframe-extras.min.js"></script>
     <!-- Super Hands -->
-    <script src="https://unpkg.com/super-hands@^3.0.4/dist/super-hands.min.js"></script>
+    <script src="aframe-super-hands-component/dist/super-hands.min.js"></script>
     <!-- Physics -->
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.1.0/dist/aframe-physics-system.min.js"></script>
     <!-- Event Set -->
@@ -21,16 +21,17 @@
     <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
     <!-- Bounding Box -->
     <script src="https://unpkg.com/aframe-bounding-box-component"></script>
-    <script src="selection.js"></script>
-    <script src="last-clicked-lg.js"></script>
-    <script src="container-box.js"></script>
-    <script src="auto-box.js"></script>
-    <script src="add-button.js"></script>
+    <!-- Components -->
+    <script src="components/selection.js"></script>
+    <script src="components/logic-gate.js"></script>
+    <script src="components/container-box.js"></script>
+    <script src="components/auto-box.js"></script>
+    <script src="components/add-button.js"></script>
     <!-- <script src="rotate-button.js"></script> -->
-    <script src="edit-toggle.js"></script>
-    <script src="last-clicked-node.js"></script>
-    <script src="transmit-node.js"></script>
-    <script src="recieve-node.js"></script>
+    <script src="components/grab_connect-toggle.js"></script>
+    <script src="components/logic-node.js"></script>
+    <script src="components/transmit-node.js"></script>
+    <script src="components/recieve-node.js"></script>
   </head>
   <body>
     <a-scene id="scene" physics="gravity: -9.8">
@@ -148,15 +149,14 @@
 
         <a-entity position="-0 -0.5 0 ">
           <a-box
-            grabDropEndButtons
             mixin="xs-cube"
             class="interactable"
             position="0 -0.5 0.05"
-            edit-toggle
+            grab_connect-toggle
           >
             ></a-box
           >
-          <a-text value="Edit Mode" position="-0.5 -0.1 0"> </a-text>
+          <a-text value="Grab Mode" position="-0.5 -0.1 0"> </a-text>
         </a-entity>
       </a-plane>
 
@@ -174,17 +174,19 @@
 
       <!-- Logic Gate Object -->
       <a-box
-        id="gates"
-        last-clicked-lg
-        class="interactable"
+        logic-gate
+        class="interactable gates"
         dynamic-body
         grabbable
-        material="color: white; opacity: 0.2; wireframe: true;"
+        hoverable
+        material="color: white; wireframe: true;opacity:0"
         depth="0.05"
         height="0.3"
         width="0.6"
         rotation="-90 0 0"
         position="0 1 -1"
+        event-set__hoveron="_event:hover-start; material.opacity:1;"
+        event-set__hoveroff="_event:hover-end; material.opacity:0;"
       >
         <a-gltf-model
           position="-0.3 -0.15 0"
@@ -201,35 +203,48 @@
           position="-0.16 0 0"
         ></a-text>
         <a-box
-          last-clicked-node
+          draggable
+          droppable
+          logic-node
           recieve-node
-          id="nodes"
+          class="nodes"
           color="white"
           scale="0.07 0.07 0.07"
           wireframe="true"
           position="-0.3 0.08 -0.02"
+          opacity="0"
+          event-set__dragon="_event: dragover-start; material.color: blue"
+          event-set__dragoff="_event: dragover-end; material.color: purple"
         >
           <a-sphere color="red" scale="0.45 0.45 0.45"></a-sphere>
         </a-box>
         <a-box
-          last-clicked-node
+          draggable
+          droppable
+          logic-node
           recieve-node
-          id="nodes"
+          class="nodes"
           color="white"
           scale="0.07 0.07 0.07"
           wireframe="true"
           position="-0.3 -0.08 -0.02"
+          opacity="0"
+          event-set__dragon="_event: dragover-start; material.color: blue"
+          event-set__dragoff="_event: dragover-end; material.color: purple"
         >
           <a-sphere color="red" scale="0.45 0.45 0.45"></a-sphere>
         </a-box>
         <a-box
-          last-clicked-node
+          draggable
+          droppable
+          logic-node
           transmit-node
-          id="nodes"
+          class="nodes"
           color="white"
           scale="0.07 0.07 0.07"
           wireframe="true"
-          position="0.25 -0 -0.02"
+          position="0.27 -0 -0.02"
+          opacity="0"
         >
           <a-sphere color="blue" scale="0.45 0.45 0.45"></a-sphere>
         </a-box>

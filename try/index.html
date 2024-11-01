@@ -12,7 +12,7 @@
     <!-- Extras and Controls -->
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.1/dist/aframe-extras.min.js"></script>
     <!-- Super Hands -->
-    <script src="https://unpkg.com/super-hands@^3.0.4/dist/super-hands.min.js"></script>
+    <script src="../aframe-super-hands-component/dist/super-hands.min.js"></script>
     <!-- Physics -->
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.1.0/dist/aframe-physics-system.min.js"></script>
     <!-- Event Set -->
@@ -21,16 +21,16 @@
     <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
     <!-- Bounding Box -->
     <script src="https://unpkg.com/aframe-bounding-box-component"></script>
-    <script src="selection.js"></script>
-    <script src="last-clicked-lg.js"></script>
-    <script src="container-box.js"></script>
-    <script src="auto-box.js"></script>
-    <script src="add-button.js"></script>
+    <script src="components/selection.js"></script>
+    <script src="components/last-clicked-lg.js"></script>
+    <script src="components/container-box.js"></script>
+    <script src="components/auto-box.js"></script>
+    <script src="components/add-button.js"></script>
     <!-- <script src="rotate-button.js"></script> -->
-    <script src="edit-toggle.js"></script>
+    <script src="components/edit-toggle.js"></script>
     <!-- <script src="last-clicked-node.js"></script> -->
-    <script src="transmit-node.js"></script>
-    <script src="recieve-node.js"></script>
+    <script src="components/transmit-node.js"></script>
+    <script src="components/recieve-node.js"></script>
     <script>
       AFRAME.registerComponent("logic-gate", {
         schema: {
@@ -42,7 +42,7 @@
             console.log(this.el.hasAttribute("grabbable"));
           } else {
             this.el.removeAttribute("grabbable");
-            console.log(this.el.hasAttribute("grabbable"));
+            console.log("removed", this.el.hasAttribute("grabbable"));
           }
         },
       });
@@ -194,12 +194,14 @@
         logic-gate
         id="gates"
         dynamic-body
-        material="color: white; opacity: 0.2; wireframe: true;"
+        material="color: white; opacity: 0; wireframe: true;"
         depth="0.05"
         height="0.3"
         width="0.6"
         rotation="-90 0 0"
         position="0 1 -1"
+        event-set__hoveron="_event:hover-start; material.opacity:1;"
+        event-set__hoveroff="_event:hover-end; material.opacity:0;"
       >
         <a-gltf-model
           position="-0.3 -0.15 0"
