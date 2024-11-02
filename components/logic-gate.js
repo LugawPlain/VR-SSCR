@@ -1,4 +1,4 @@
-let activeEl = null;
+// let activeEl = null;
 
 AFRAME.registerComponent("logic-gate", {
   schema: {

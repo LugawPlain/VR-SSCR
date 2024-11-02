@@ -5,7 +5,10 @@ AFRAME.registerComponent("logic-node", {
       default: false,
     },
   },
-  init: function () {},
+  init: function () {
+    const uuid = THREE.MathUtils.generateUUID();
+    this.el.setAttribute("uuid", uuid);
+  },
 
   update: function (oldData) {
     if (this.data.setToggle) {
@@ -16,5 +19,6 @@ AFRAME.registerComponent("logic-node", {
   },
   remove: function () {
     this.el.classList.remove("interactable");
+    this.el.removeAttribute("uuid");
   },
 });

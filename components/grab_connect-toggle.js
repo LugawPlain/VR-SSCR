@@ -1,3 +1,4 @@
+let Globaltoggle = false;
 AFRAME.registerComponent("grab_connect-toggle", {
   schema: {
     toggle: { type: "boolean", default: false },
@@ -53,10 +54,12 @@ AFRAME.registerComponent("grab_connect-toggle", {
             easing: "easeOutQuad",
           });
           this.data.toggle = false;
+          Globaltoggle = false;
           this.setToggle(this.data.toggle);
           this.changeText(this.data.toggle);
         } else {
           this.data.toggle = true;
+          Globaltoggle = true;
           this.setToggle(this.data.toggle);
           this.changeText(this.data.toggle);
         }

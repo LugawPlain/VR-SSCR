@@ -32,6 +32,7 @@
     <script src="components/logic-node.js"></script>
     <script src="components/transmit-node.js"></script>
     <script src="components/recieve-node.js"></script>
+    <script src="components/line-follow.js"></script>
   </head>
   <body>
     <a-scene id="scene" physics="gravity: -9.8">
@@ -108,6 +109,15 @@
         <!--  -->
         <a-entity position="0 0 0">
           <a-text value="Add Logic Gates" position="-0.8 0.6 0.0"></a-text>
+          <a-box
+            add-button
+            class="interactable"
+            position="-2 0 0.05"
+            selection
+            mixin="sm-cube"
+            color="white"
+            ><a-text value="Input" position="-0.28 0 0.2"></a-text
+          ></a-box>
 
           <a-box
             add-button
@@ -144,6 +154,15 @@
             mixin="sm-cube"
             color="white"
             ><a-text value="XOR" position="-0.25 0 0.2"></a-text
+          ></a-box>
+          <a-box
+            add-button
+            class="interactable"
+            position="2 0 0.05"
+            selection
+            mixin="sm-cube"
+            color="white"
+            ><a-text value="Output" position="-0.3 0 0.2"></a-text
           ></a-box>
         </a-entity>
 
@@ -204,7 +223,7 @@
           droppable
           logic-node
           recieve-node
-          class="nodes"
+          class="nodes recieve-node"
           color="white"
           scale="0.07 0.07 0.07"
           wireframe="true"
@@ -217,7 +236,7 @@
           droppable
           logic-node
           recieve-node
-          class="nodes"
+          class="nodes recieve-node"
           color="white"
           scale="0.07 0.07 0.07"
           wireframe="true"
@@ -232,7 +251,76 @@
           droppable
           logic-node
           transmit-node
-          class="nodes"
+          class="nodes transmit-node"
+          color="white"
+          scale="0.07 0.07 0.07"
+          wireframe="true"
+          position="0.27 -0 -0.02"
+          opacity="0"
+        >
+          <a-sphere color="blue" scale="0.45 0.45 0.45"></a-sphere>
+        </a-box>
+      </a-box>
+      <a-box
+        logic-gate
+        class="interactable gates"
+        dynamic-body
+        grabbable
+        hoverable
+        material="color: white; wireframe: true;opacity:0"
+        depth="0.05"
+        height="0.3"
+        width="0.6"
+        rotation="-90 0 0"
+        position="1 1 -1"
+      >
+        <a-gltf-model
+          position="-0.3 -0.15 0"
+          src="#XOR_GATE_PLATE"
+          scale="0.02 0.02 0.04"
+          rotation="0 0 0"
+          material="color:red"
+        ></a-gltf-model>
+        <a-text
+          value="XOR"
+          color="yellow"
+          scale="0.5 0.5 0.5"
+          rotation="0 0 0"
+          position="-0.16 0 0"
+        ></a-text>
+        <a-box
+          droppable
+          logic-node
+          recieve-node
+          class="nodes recieve-node"
+          color="white"
+          scale="0.07 0.07 0.07"
+          wireframe="true"
+          position="-0.3 0.08 -0.02"
+          opacity="0"
+        >
+          <a-sphere color="red" scale="0.45 0.45 0.45"></a-sphere>
+        </a-box>
+        <a-box
+          droppable
+          logic-node
+          recieve-node
+          class="nodes recieve-node"
+          color="white"
+          scale="0.07 0.07 0.07"
+          wireframe="true"
+          position="-0.3 -0.08 -0.02"
+          opacity="0"
+        >
+          <a-sphere color="red" scale="0.45 0.45 0.45"></a-sphere>
+        </a-box>
+        <a-box
+          hoverable
+          draggable
+          droppable
+          logic-node
+          transmit-node
+          class="nodes transmit-node"
           color="white"
           scale="0.07 0.07 0.07"
           wireframe="true"
