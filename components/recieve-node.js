@@ -7,6 +7,7 @@ AFRAME.registerComponent("recieve-node", {
     value: { type: "boolean", default: false },
   },
   init: function () {
+    console.log(this.el.object3D.uuid);
     this.sceneEl = this.el.sceneEl;
     this.dragged = false;
     this.onDragOverStart = this.onDragOverStart.bind(this);
@@ -55,11 +56,17 @@ AFRAME.registerComponent("recieve-node", {
     this.dragged = true;
 
     this.data.connectedTo = evt.detail.dropped;
+    if (this.data.connectedTo.parentNode == this.el.parentNode) {
+      this.data.connectedTo = null;
+      this.dragged = false;
+      return;
+    }
     const dropped = this.data.connectedTo;
     this.data.connectedToUuid = this.data.connectedTo.object3D.uuid;
     const droppedUuid = this.data.connectedToUuid;
 
     const target = evt.detail.target;
+
     const targetUuid = target.object3D.uuid;
 
     const connectLine = document.createElement("a-entity");

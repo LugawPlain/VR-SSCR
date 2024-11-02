@@ -49,11 +49,15 @@ AFRAME.registerComponent("line-follow", {
         end: `${endWorldPosition.x} ${endWorldPosition.y} ${endWorldPosition.z}`,
       });
     }
-    const recieveNodeData = this.data.endEl.components["recieve-node"];
-    if (recieveNodeData) {
-      //   console.log(
-      //     this.data.startElUuid == recieveNodeData.data.connectedToUuid
-      //   );
+    const transmitNodeData = this.data.startEl.components["transmit-node"];
+    if (transmitNodeData) {
+      if (
+        false ==
+        (this.data.endElUuid == transmitNodeData.data.connectedToUuid)
+      ) {
+        console.log("removed");
+        this.el.parentNode.removeChild(this.el);
+      }
     }
   },
 });

@@ -7,13 +7,13 @@ AFRAME.registerComponent("add-button", {
       const spawnPos = "0 1.5 0";
       const gate = this.el.querySelector("a-text").getAttribute("value");
       const inputPlate = `
-      <a-box
-        id="gates"
+       <a-box
         logic-gate
-        class="interactable"
+        class="interactable gates"
         dynamic-body
         grabbable
-        material="color: white; opacity: 0.2; wireframe: true;"
+        hoverable
+        material="color: white; wireframe: true; opacity: 0"
         depth="0.05"
         height="0.3"
         width="0.6"
@@ -25,7 +25,7 @@ AFRAME.registerComponent("add-button", {
           src="#NOT_GATE_PLATE"
           scale="0.02 0.02 0.04"
           rotation="0 0 0"
-          material="color:red"
+          material="color: red"
         ></a-gltf-model>
         <a-text
           value="Input"
@@ -34,18 +34,33 @@ AFRAME.registerComponent("add-button", {
           rotation="0 0 0"
           position="-0.16 0 0"
         ></a-text>
-        <a-box color="white" scale="0.07 0.07 0.07" wireframe="true" position="0.3 0 -0.02">
-        <a-sphere id="node" transmit-node color="blue" scale="0.45 0.45 0.45"></a-sphere>
+        <a-box
+          hoverable
+          draggable
+          droppable
+          logic-node
+          transmit-node
+          opacity="0"
+          class="nodes transmit-node"
+          color="white"
+          scale="0.07 0.07 0.07"
+          wireframe="true"
+          position="0.3 0 -0.02"  
+        >
+          <a-sphere
+            color="blue"
+            scale="0.45 0.45 0.45"
+          ></a-sphere>
         </a-box>
       </a-box>`;
       const notPlate = `
-      <a-box
-        id="gates"
+        <a-box
         logic-gate
-        class="interactable"
+        class="interactable gates"
         dynamic-body
         grabbable
-        material="color: white; opacity: 0.2; wireframe: true;"
+        hoverable
+        material="color: white; wireframe: true;opacity:0"
         depth="0.05"
         height="0.3"
         width="0.6"
@@ -66,21 +81,53 @@ AFRAME.registerComponent("add-button", {
           rotation="0 0 0"
           position="-0.16 0 0"
         ></a-text>
-        <a-box color="white" scale="0.07 0.07 0.07" wireframe="true" position="-0.3 0 -0.02">
-        <a-sphere id="node" recieve-node color="red" scale="0.45 0.45 0.45"></a-sphere>
+        <a-box
+          droppable
+          logic-node
+          recieve-node
+          opacity="0"
+          class="nodes recieve-node"
+          color="white"
+          scale="0.07 0.07 0.07"
+          wireframe="true"
+          position="-0.3 0 -0.02"
+        >
+          <a-sphere
+            id="node"
+            recieve-node
+            color="red"
+            scale="0.45 0.45 0.45"
+          ></a-sphere>
         </a-box>
-        <a-box color="white" scale="0.07 0.07 0.07" wireframe="true" position="0.3 0 -0.02">
-        <a-sphere id="node" transmit-node color="blue" scale="0.45 0.45 0.45"></a-sphere>
+        <a-box
+          hoverable
+          draggable
+          droppable
+          logic-node
+          transmit-node
+          opacity="0"
+          class="nodes transmit-node"
+          color="white"
+          scale="0.07 0.07 0.07"
+          wireframe="true"
+          position="0.3 0 -0.02"
+        >
+          <a-sphere
+            id="node"
+            transmit-node
+            color="blue"
+            scale="0.45 0.45 0.45"
+          ></a-sphere>
         </a-box>
       </a-box>`;
       const orPlate = `
-      <a-box
-        id="gates"
+          <a-box
         logic-gate
-        class="interactable"
+        class="interactable gates"
         dynamic-body
         grabbable
-        material="color: white; opacity: 0.2; wireframe: true;"
+        hoverable
+        material="color: white; wireframe: true;opacity:0"
         depth="0.05"
         height="0.3"
         width="0.6"
@@ -101,25 +148,68 @@ AFRAME.registerComponent("add-button", {
           rotation="0 0 0"
           position="-0.16 0 0"
         ></a-text>
-        <a-box color="white" scale="0.07 0.07 0.07" wireframe="true" position="-0.3 0.08 -0.02">
-        <a-sphere recieve-node color="red" id="node" scale="0.45 0.45 0.45"></a-sphere>
+        <a-box
+          droppable
+          logic-node
+          recieve-node
+          opacity="0"
+          class="nodes recieve-node"
+          color="white"
+          scale="0.07 0.07 0.07"
+          wireframe="true"
+          position="-0.3 0.08 -0.02"
+        >
+          <a-sphere
+            recieve-node
+            color="red"
+            id="node"
+            scale="0.45 0.45 0.45"
+          ></a-sphere>
         </a-box>
-        <a-box color="white" scale="0.07 0.07 0.07" wireframe="true" position="-0.3 -0.08 -0.02">
-        <a-sphere recieve-node color="red" id="node" scale="0.45 0.45 0.45"
-        ></a-sphere>
+        <a-box
+          droppable
+          logic-node
+          recieve-node
+          class="nodes recieve-node"
+          opacity="0"
+          color="white"
+          scale="0.07 0.07 0.07"
+          wireframe="true"
+          position="-0.3 -0.08 -0.02"
+        >
+          <a-sphere
+            color="red"
+            scale="0.45 0.45 0.45"
+          ></a-sphere>
         </a-box>
-         <a-box color="white" scale="0.07 0.07 0.07" wireframe="true" position="0.23 -0 -0.02">
-        <a-sphere transmit-node color="blue" id="node" scale="0.45 0.45 0.45" ></a-sphere>
+        <a-box
+          hoverable
+          draggable
+          droppable
+          logic-node
+          transmit-node
+          opacity="0"
+          class="nodes transmit-node"
+          color="white"
+          scale="0.07 0.07 0.07"
+          wireframe="true"
+          position="0.23 -0 -0.02"
+        >
+          <a-sphere
+            color="blue"
+            scale="0.45 0.45 0.45"
+          ></a-sphere>
         </a-box>
       </a-box>`;
       const andPlate = `
+     
       <a-box
-        id="gates"
         logic-gate
-        class="interactable"
+        class="interactable gates"
         dynamic-body
         grabbable
-        material="color: white; opacity: 0.2; wireframe: true;"
+        hoverable
+        material="color: white; wireframe: true;opacity:0"
         depth="0.05"
         height="0.3"
         width="0.6"
@@ -140,30 +230,76 @@ AFRAME.registerComponent("add-button", {
           rotation="0 0 0"
           position="-0.16 0 0"
         ></a-text>
-        <a-box color="white" scale="0.07 0.07 0.07" wireframe="true" position="-0.3 0.08 -0.02">
-        <a-sphere recieve-node color="red" id="node" scale="0.45 0.45 0.45"></a-sphere>
+        <a-box
+          droppable
+          logic-node
+          recieve-node
+          opacity="0"
+          class="nodes recieve-node"
+          color="white"
+          scale="0.07 0.07 0.07"
+          wireframe="true"
+          position="-0.3 0.08 -0.02"
+        >
+          <a-sphere
+            recieve-node
+            color="red"
+            id="node"
+            scale="0.45 0.45 0.45"
+          ></a-sphere>
         </a-box>
-        <a-box color="white" scale="0.07 0.07 0.07" wireframe="true" position="-0.3 -0.08 -0.02">
-        <a-sphere recieve-node color="red" id="node" scale="0.45 0.45 0.45"
-        ></a-sphere>
+        <a-box
+          droppable
+          logic-node
+          recieve-node
+          opacity="0"
+          class="nodes recieve-node"
+          color="white"
+          scale="0.07 0.07 0.07"
+          wireframe="true"
+          position="-0.3 -0.08 -0.02"
+        >
+          <a-sphere
+            recieve-node
+            color="red"
+            id="node"
+            scale="0.45 0.45 0.45"
+          ></a-sphere>
         </a-box>
-         <a-box color="white" scale="0.07 0.07 0.07" wireframe="true" position="0.23 -0 -0.02">
-        <a-sphere transmit-node color="blue" id="node" scale="0.45 0.45 0.45" ></a-sphere>
+        <a-box
+          hoverable
+          draggable
+          droppable
+          logic-node
+          transmit-node
+          opacity="0"
+          class="nodes transmit-node"
+          color="white"
+          scale="0.07 0.07 0.07"
+          wireframe="true"
+          position="0.23 -0 -0.02"
+        >
+          <a-sphere
+            transmit-node
+            color="blue"
+            id="node"
+            scale="0.45 0.45 0.45"
+          ></a-sphere>
         </a-box>
       </a-box>`;
       const xorPlate = `
       <a-box
-        id="gates"
         logic-gate
-        class="interactable"
+        class="interactable gates"
         dynamic-body
         grabbable
-        material="color: white; opacity: 0.2; wireframe: true;"
+        hoverable
+        material="color: white; wireframe: true;opacity:0"
         depth="0.05"
         height="0.3"
         width="0.6"
         rotation="-90 0 0"
-        position="${spawnPos}"
+        position="0 1 -1"
       >
         <a-gltf-model
           position="-0.3 -0.15 0"
@@ -179,25 +315,56 @@ AFRAME.registerComponent("add-button", {
           rotation="0 0 0"
           position="-0.16 0 0"
         ></a-text>
-        <a-box last-clicked-node recieve-node id="nodes" color="white" scale="0.07 0.07 0.07" wireframe="true" position="-0.3 0.08 -0.02">
-        <a-sphere  color="red"  scale="0.45 0.45 0.45"></a-sphere>
+        <a-box
+          droppable
+          logic-node
+          recieve-node
+          class="nodes recieve-node"
+          color="white"
+          scale="0.07 0.07 0.07"
+          wireframe="true"
+          position="-0.3 0.08 -0.02"
+          opacity="0"
+        >
+          <a-sphere color="red" scale="0.45 0.45 0.45"></a-sphere>
         </a-box>
-        <a-box last-clicked-node recieve-node id="nodes" color="white" scale="0.07 0.07 0.07" wireframe="true" position="-0.3 -0.08 -0.02">
-        <a-sphere color="red" scale="0.45 0.45 0.45"
-        ></a-sphere>
+        <a-box
+          droppable
+          logic-node
+          recieve-node
+          class="nodes recieve-node"
+          color="white"
+          scale="0.07 0.07 0.07"
+          wireframe="true"
+          position="-0.3 -0.08 -0.02"
+          opacity="0"
+        >
+          <a-sphere color="red" scale="0.45 0.45 0.45"></a-sphere>
         </a-box>
-        <a-box last-clicked-node transmit-node id="nodes" color="white" scale="0.07 0.07 0.07" wireframe="true" position="0.25 -0 -0.02">
-        <a-sphere color="blue" scale="0.45 0.45 0.45" ></a-sphere>
+        <a-box
+          hoverable
+          draggable
+          droppable
+          logic-node
+          transmit-node
+          class="nodes transmit-node"
+          color="white"
+          scale="0.07 0.07 0.07"
+          wireframe="true"
+          position="0.27 -0 -0.02"
+          opacity="0"
+        >
+          <a-sphere color="blue" scale="0.45 0.45 0.45"></a-sphere>
         </a-box>
       </a-box>`;
       const outputPlate = `
       <a-box
-        id="gates"
         logic-gate
-        class="interactable"
+        class="interactable gates"
         dynamic-body
         grabbable
-        material="color: white; opacity: 0.2; wireframe: true;"
+        hoverable
+        material="color: white; wireframe: true;opacity:0"
         depth="0.05"
         height="0.3"
         width="0.6"
@@ -218,9 +385,25 @@ AFRAME.registerComponent("add-button", {
           rotation="0 0 0"
           position="-0.16 0 0"
         ></a-text>
-        <a-box color="white" scale="0.07 0.07 0.07" wireframe="true" position="-0.3 0 -0.02">
-        <a-sphere id="node" recieve-node color="red" scale="0.45 0.45 0.45"></a-sphere>
+        <a-box
+          droppable
+          logic-node
+          recieve-node
+          opacity="0"
+          class="nodes recieve-node"
+          color="white"
+          scale="0.07 0.07 0.07"
+          wireframe="true"
+          position="-0.3 0 -0.02"
+        >
+          <a-sphere
+            id="node"
+            recieve-node
+            color="red"
+            scale="0.45 0.45 0.45"
+          ></a-sphere>
         </a-box>
+    
       </a-box>`;
 
       const sceneEl = document.querySelector("a-scene");

@@ -7,6 +7,7 @@ AFRAME.registerComponent("transmit-node", {
     value: { type: "boolean", default: false },
   },
   init: function () {
+    console.log(this.el.object3D.uuid);
     this.sceneEl = this.el.sceneEl;
     this.dragStartFlag;
     this.onDragStart = this.onDragStart.bind(this);
@@ -74,8 +75,13 @@ AFRAME.registerComponent("transmit-node", {
   onDragDrop: function (evt) {
     //transmitting second in event
     console.log("dragdrop-transimiting");
-
     this.data.connectedTo = evt.detail.target;
+    if (this.data.connectedTo.parentNode == this.el.parentNode) {
+      this.data.connectedTo = null;
+      return;
+    }
+    this.data.connectedToUuid = this.data.connectedTo.object3D.uuid;
+
     if (!this.data.connectedTo) {
       this.el.setAttribute("material", {
         color: "white",
