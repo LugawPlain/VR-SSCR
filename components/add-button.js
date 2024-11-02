@@ -47,6 +47,7 @@ AFRAME.registerComponent("add-button", {
           wireframe="true"
           position="0.3 0 -0.02"  
         >
+          <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
           <a-sphere
             color="blue"
             scale="0.45 0.45 0.45"
@@ -55,6 +56,7 @@ AFRAME.registerComponent("add-button", {
       </a-box>`;
       const notPlate = `
         <a-box
+        not-logic
         logic-gate
         class="interactable gates"
         dynamic-body
@@ -92,6 +94,7 @@ AFRAME.registerComponent("add-button", {
           wireframe="true"
           position="-0.3 0 -0.02"
         >
+          <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
           <a-sphere
             id="node"
             recieve-node
@@ -112,6 +115,7 @@ AFRAME.registerComponent("add-button", {
           wireframe="true"
           position="0.3 0 -0.02"
         >
+          <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
           <a-sphere
             id="node"
             transmit-node
@@ -159,6 +163,7 @@ AFRAME.registerComponent("add-button", {
           wireframe="true"
           position="-0.3 0.08 -0.02"
         >
+          <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
           <a-sphere
             recieve-node
             color="red"
@@ -177,6 +182,7 @@ AFRAME.registerComponent("add-button", {
           wireframe="true"
           position="-0.3 -0.08 -0.02"
         >
+          <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
           <a-sphere
             color="red"
             scale="0.45 0.45 0.45"
@@ -241,6 +247,7 @@ AFRAME.registerComponent("add-button", {
           wireframe="true"
           position="-0.3 0.08 -0.02"
         >
+          <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
           <a-sphere
             recieve-node
             color="red"
@@ -259,6 +266,7 @@ AFRAME.registerComponent("add-button", {
           wireframe="true"
           position="-0.3 -0.08 -0.02"
         >
+          <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
           <a-sphere
             recieve-node
             color="red"
@@ -279,6 +287,7 @@ AFRAME.registerComponent("add-button", {
           wireframe="true"
           position="0.23 -0 -0.02"
         >
+          <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
           <a-sphere
             transmit-node
             color="blue"
@@ -326,6 +335,7 @@ AFRAME.registerComponent("add-button", {
           position="-0.3 0.08 -0.02"
           opacity="0"
         >
+          <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
           <a-sphere color="red" scale="0.45 0.45 0.45"></a-sphere>
         </a-box>
         <a-box
@@ -339,6 +349,7 @@ AFRAME.registerComponent("add-button", {
           position="-0.3 -0.08 -0.02"
           opacity="0"
         >
+          <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
           <a-sphere color="red" scale="0.45 0.45 0.45"></a-sphere>
         </a-box>
         <a-box
@@ -354,6 +365,7 @@ AFRAME.registerComponent("add-button", {
           position="0.27 -0 -0.02"
           opacity="0"
         >
+          <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
           <a-sphere color="blue" scale="0.45 0.45 0.45"></a-sphere>
         </a-box>
       </a-box>`;
@@ -396,6 +408,7 @@ AFRAME.registerComponent("add-button", {
           wireframe="true"
           position="-0.3 0 -0.02"
         >
+          <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
           <a-sphere
             id="node"
             recieve-node

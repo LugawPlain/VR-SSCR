@@ -27,6 +27,11 @@ AFRAME.registerComponent("recieve-node", {
     if (this.data.connectedTo) {
       this.data.value = true;
     }
+    if (this.data.value) {
+      this.el.children[0].setAttribute("value", "1");
+    } else {
+      this.el.children[0].setAttribute("value", "0");
+    }
   },
   remove: function () {
     this.el.removeEventListener("dragover-start", this.onDragOverStart);

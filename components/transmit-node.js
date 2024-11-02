@@ -31,6 +31,11 @@ AFRAME.registerComponent("transmit-node", {
       this.el.removeEventListener("hover-start", this.onHoverStart);
       this.el.removeEventListener("hover-end", this.onHoverEnd);
     }
+    if (this.data.value) {
+      this.el.children[0].setAttribute("value", "1");
+    } else {
+      this.el.children[0].setAttribute("value", "0");
+    }
   },
   remove: function () {
     this.el.removeEventListener("drag-start", this.onDragStart);

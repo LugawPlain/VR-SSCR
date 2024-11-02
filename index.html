@@ -34,6 +34,7 @@
     <script src="components/recieve-node.js"></script>
     <script src="components/line-follow.js"></script>
     <script src="components/run-toggle.js"></script>
+    <script src="components/not-logic.js"></script>
   </head>
   <body>
     <a-scene id="scene" physics="gravity: -9.8">
@@ -243,6 +244,7 @@
           wireframe="true"
           position="-0.3 0.08 -0.02"
         >
+          <a-text value="1"></a-text>
           <a-sphere color="red" scale="0.45 0.45 0.45"></a-sphere>
         </a-box>
         <a-box
@@ -256,6 +258,7 @@
           wireframe="true"
           position="-0.3 -0.08 -0.02"
         >
+          <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
           <a-sphere color="red" scale="0.45 0.45 0.45"></a-sphere>
         </a-box>
         <a-box
@@ -271,6 +274,7 @@
           wireframe="true"
           position="0.27 -0 -0.02"
         >
+          <a-text value="1"></a-text>
           <a-sphere color="blue" scale="0.45 0.45 0.45"></a-sphere>
         </a-box>
       </a-box>

@@ -14,7 +14,6 @@ AFRAME.registerComponent("logic-gate", {
   },
 
   update: function (oldData) {
-    console.log("setToggle value:", this.data.setToggle);
     if (this.data.setToggle) {
       this.el.setAttribute("material", { color: "white", opacity: 0 });
       this.el.classList.remove("interactable");
