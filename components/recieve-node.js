@@ -7,6 +7,9 @@ AFRAME.registerComponent("recieve-node", {
     value: { type: "boolean", default: false },
   },
   init: function () {
+    this.el.addEventListener("loaded", () => {
+      this.updateTextValue();
+    });
     console.log(this.el.object3D.uuid);
     this.sceneEl = this.el.sceneEl;
     this.dragged = false;
@@ -24,14 +27,18 @@ AFRAME.registerComponent("recieve-node", {
       this.el.removeEventListener("dragover-end", this.onDragOverEnd);
       this.el.removeEventListener("drag-drop", this.onDragDrop);
     }
-    if (this.data.connectedTo) {
-      this.data.value = true;
+    if (this.data.connectedToUuid && this.data.connectedTo) {
+      const inputEl = this.data.connectedTo;
+      const inputComponent = inputEl.getAttribute("transmit-node");
+
+      if (inputComponent && inputComponent.value) {
+        this.data.value = true;
+      } else {
+        this.data.value = false;
+      }
     }
-    if (this.data.value) {
-      this.el.children[0].setAttribute("value", "1");
-    } else {
-      this.el.children[0].setAttribute("value", "0");
-    }
+
+    this.updateTextValue();
   },
   remove: function () {
     this.el.removeEventListener("dragover-start", this.onDragOverStart);
@@ -47,13 +54,11 @@ AFRAME.registerComponent("recieve-node", {
   },
   onDragOverEnd: function (evt) {
     console.log("drag-over-end");
-    if (!this.dragged) {
-      this.el.setAttribute("material", {
-        opacity: 0,
-        color: "red",
-      });
-      this.dragged = false;
-    }
+
+    this.el.setAttribute("material", {
+      opacity: 0,
+      color: "red",
+    });
   },
   onDragDrop: function (evt) {
     //recieve first before transmiting in evnt
@@ -84,10 +89,25 @@ AFRAME.registerComponent("recieve-node", {
       startElUuid: droppedUuid,
       endElUuid: targetUuid,
     });
+    this.el.setAttribute("material", {
+      opacity: 0,
+    });
   },
   tick: function () {
     const worldPosition = new THREE.Vector3();
     this.el.object3D.getWorldPosition(worldPosition);
     this.data.worldPosition = worldPosition;
+  },
+  updateTextValue: function () {
+    const textElement = this.el.querySelector("a-text");
+
+    if (textElement) {
+      const newValue = this.data.value ? "1" : "0";
+      textElement.setAttribute("value", newValue);
+      console.log(`Updated text value to: ${newValue}`);
+    } else {
+      console.log(this.el);
+      console.warn("No <a-text> element found in the entity.");
+    }
   },
 });

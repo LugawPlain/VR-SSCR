@@ -34,7 +34,11 @@
     <script src="components/recieve-node.js"></script>
     <script src="components/line-follow.js"></script>
     <script src="components/run-toggle.js"></script>
+    <script src="components/input-logic.js"></script>
     <script src="components/not-logic.js"></script>
+    <script src="components/or-logic.js"></script>
+    <script src="components/and-logic.js"></script>
+    <script src="components/xor-logic.js"></script>
   </head>
   <body>
     <a-scene id="scene" physics="gravity: -9.8">
@@ -69,6 +73,9 @@
 
         <a-asset-item id="XOR_GATE_PLATE" src="assests/XOR_GATE_PLATE.glb">
         </a-asset-item>
+        <a-asset-item id="Button_case" src="assests/Button Case.glb">
+        </a-asset-item>
+        <a-asset-item id="Button" src="assests/Button.glb"> </a-asset-item>
 
         <a-mixin
           id="xs-cube"
@@ -207,6 +214,7 @@
 
       <!-- Logic Gate Object -->
       <a-box
+        xor-logic
         logic-gate
         class="interactable gates"
         dynamic-body
@@ -244,7 +252,7 @@
           wireframe="true"
           position="-0.3 0.08 -0.02"
         >
-          <a-text value="1"></a-text>
+          <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
           <a-sphere color="red" scale="0.45 0.45 0.45"></a-sphere>
         </a-box>
         <a-box
@@ -274,80 +282,76 @@
           wireframe="true"
           position="0.27 -0 -0.02"
         >
-          <a-text value="1"></a-text>
+          <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
           <a-sphere color="blue" scale="0.45 0.45 0.45"></a-sphere>
         </a-box>
       </a-box>
 
       <a-box
+        input-logic
         logic-gate
         class="interactable gates"
         dynamic-body
         grabbable
         hoverable
-        material="color: white; wireframe: true;opacity:0"
-        depth="0.05"
-        height="0.3"
-        width="0.6"
+        material="color: white; wireframe: true; opacity: 0"
+        depth="0.12 "
+        height="0.2"
+        width="0.35"
         rotation="-90 0 0"
-        position="1 1 -1"
+        position="-1 1 -1"
       >
         <a-gltf-model
-          position="-0.3 -0.15 0"
-          src="#XOR_GATE_PLATE"
-          scale="0.02 0.02 0.04"
-          rotation="0 0 0"
-          material="color:red"
+          input-button
+          src="#Button"
+          position="-0.036 0.041 -0.003"
+          rotation="180 0 0"
+          scale="0.008 0.008 0.005"
+        >
+          <a-text
+            value="Input"
+            color="yellow"
+            rotation="180 0 0"
+            position="-0.368 4.354 -7.602"
+            scale="20 20 20"
+          ></a-text
         ></a-gltf-model>
-        <a-text
-          value="XOR"
-          color="yellow"
-          scale="0.5 0.5 0.5"
-          rotation="0 0 0"
-          position="-0.16 0 0"
-        ></a-text>
-        <a-box
-          droppable
-          logic-node
-          recieve-node
-          class="nodes recieve-node"
-          color="white"
-          scale="0.07 0.07 0.07"
-          wireframe="true"
-          position="-0.3 0.08 -0.02"
-          opacity="0"
+        <a-gltf-model
+          input-button
+          src="#Button_case"
+          position="-0.06 0.06 -0.02"
+          rotation="180 0 0"
+          scale="0.01 0.01 0.01"
         >
-          <a-sphere color="red" scale="0.45 0.45 0.45"></a-sphere>
-        </a-box>
+        </a-gltf-model>
+
         <a-box
-          droppable
-          logic-node
-          recieve-node
-          class="nodes recieve-node"
-          color="white"
-          scale="0.07 0.07 0.07"
-          wireframe="true"
-          position="-0.3 -0.08 -0.02"
-          opacity="0"
+          position="0.1 0 -0.01"
+          height="0.025"
+          width="0.1"
+          depth="0.02"
+          material="color: black"
         >
-          <a-sphere color="red" scale="0.45 0.45 0.45"></a-sphere>
         </a-box>
+
         <a-box
           hoverable
           draggable
           droppable
           logic-node
           transmit-node
+          opacity="0"
           class="nodes transmit-node"
           color="white"
           scale="0.07 0.07 0.07"
           wireframe="true"
-          position="0.27 -0 -0.02"
-          opacity="0"
+          position="0.15 0 0"
         >
-          <a-sphere color="blue" scale="0.45 0.45 0.45"></a-sphere>
+          <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
+          <a-sphere color="white" scale="0.45 0.45 0.45"></a-sphere>
         </a-box>
       </a-box>
+
       <!-- XOR -->
 
       <!-- Floor -->

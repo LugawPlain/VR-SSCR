@@ -1,4 +1,4 @@
-AFRAME.registerComponent("not-logic", {
+AFRAME.registerComponent("output-logic", {
   schema: {},
 
   init: function () {},
@@ -11,10 +11,10 @@ AFRAME.registerComponent("not-logic", {
     const inputNodes = Array.from(this.el.children).filter((child) => {
       return child.hasAttribute("recieve-node");
     });
-    const outputNodes = Array.from(this.el.children).filter((child) => {
-      return child.hasAttribute("transmit-node");
-    });
+    //   const outputNodes = Array.from(this.el.children).filter((child) => {
+    //     return child.hasAttribute("transmit-node");
+    //   });
     const input = inputNodes[0].getAttribute("recieve-node").value;
-    outputNodes[0].setAttribute("transmit-node", "value", !input);
+    inputNodes[0].setAttribute("transmit-node", "value", input);
   },
 });

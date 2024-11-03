@@ -8,6 +8,7 @@ AFRAME.registerComponent("add-button", {
       const gate = this.el.querySelector("a-text").getAttribute("value");
       const inputPlate = `
        <a-box
+        input-logic
         logic-gate
         class="interactable gates"
         dynamic-body
@@ -96,8 +97,6 @@ AFRAME.registerComponent("add-button", {
         >
           <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
           <a-sphere
-            id="node"
-            recieve-node
             color="red"
             scale="0.45 0.45 0.45"
           ></a-sphere>
@@ -117,15 +116,14 @@ AFRAME.registerComponent("add-button", {
         >
           <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
           <a-sphere
-            id="node"
-            transmit-node
             color="blue"
             scale="0.45 0.45 0.45"
           ></a-sphere>
         </a-box>
       </a-box>`;
       const orPlate = `
-          <a-box
+        <a-box
+        or-logic
         logic-gate
         class="interactable gates"
         dynamic-body
@@ -165,9 +163,7 @@ AFRAME.registerComponent("add-button", {
         >
           <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
           <a-sphere
-            recieve-node
             color="red"
-            id="node"
             scale="0.45 0.45 0.45"
           ></a-sphere>
         </a-box>
@@ -201,6 +197,7 @@ AFRAME.registerComponent("add-button", {
           wireframe="true"
           position="0.23 -0 -0.02"
         >
+        <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
           <a-sphere
             color="blue"
             scale="0.45 0.45 0.45"
@@ -210,6 +207,7 @@ AFRAME.registerComponent("add-button", {
       const andPlate = `
      
       <a-box
+        and-logic
         logic-gate
         class="interactable gates"
         dynamic-body
@@ -249,9 +247,7 @@ AFRAME.registerComponent("add-button", {
         >
           <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
           <a-sphere
-            recieve-node
             color="red"
-            id="node"
             scale="0.45 0.45 0.45"
           ></a-sphere>
         </a-box>
@@ -268,9 +264,7 @@ AFRAME.registerComponent("add-button", {
         >
           <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
           <a-sphere
-            recieve-node
             color="red"
-            id="node"
             scale="0.45 0.45 0.45"
           ></a-sphere>
         </a-box>
@@ -289,15 +283,14 @@ AFRAME.registerComponent("add-button", {
         >
           <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
           <a-sphere
-            transmit-node
             color="blue"
-            id="node"
             scale="0.45 0.45 0.45"
           ></a-sphere>
         </a-box>
       </a-box>`;
       const xorPlate = `
       <a-box
+        xor-logic
         logic-gate
         class="interactable gates"
         dynamic-body
@@ -371,6 +364,7 @@ AFRAME.registerComponent("add-button", {
       </a-box>`;
       const outputPlate = `
       <a-box
+        output-logic
         logic-gate
         class="interactable gates"
         dynamic-body

@@ -60,13 +60,7 @@ AFRAME.registerComponent("transmit-node", {
   },
   onHoverEnd: function () {
     console.log("hover-end");
-    if (this.data.connectedTo) {
-      this.el.setAttribute("material", {
-        color: "blue",
-        opacity: 1,
-      });
-      return;
-    }
+
     if (!this.dragStartFlag) {
       this.el.setAttribute("material", {
         opacity: 0,
@@ -76,6 +70,9 @@ AFRAME.registerComponent("transmit-node", {
   onDragEnd: function (evt) {
     console.log("drag-end");
     this.dragStartFlag = false;
+    this.el.setAttribute("material", {
+      opacity: 0,
+    });
   },
   onDragDrop: function (evt) {
     //transmitting second in event
@@ -94,6 +91,9 @@ AFRAME.registerComponent("transmit-node", {
       });
     }
     this.data.connectedToUuid = this.data.connectedTo.object3D.uuid;
+    this.el.setAttribute("material", {
+      opacity: 0,
+    });
   },
 
   tick: function (time, timeDelta) {

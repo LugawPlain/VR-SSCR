@@ -51,13 +51,19 @@ AFRAME.registerComponent("line-follow", {
     }
     const transmitNodeData = this.data.startEl.components["transmit-node"];
     if (transmitNodeData) {
-      if (
-        false ==
-        (this.data.endElUuid == transmitNodeData.data.connectedToUuid)
-      ) {
+      if (this.data.endElUuid !== transmitNodeData.data.connectedToUuid) {
         console.log("removed");
         this.el.parentNode.removeChild(this.el);
       }
     }
+    // if (transmitNodeData.data.value) {
+    //   this.el.setAttribute("line", {
+    //     color: "blue",
+    //   });
+    // } else {
+    //   this.el.setAttribute("line", {
+    //     color: "white",
+    //   });
+    // }
   },
 });
