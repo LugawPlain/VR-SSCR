@@ -76,6 +76,10 @@
         <a-asset-item id="Button_case" src="assests/Button Case.glb">
         </a-asset-item>
         <a-asset-item id="Button" src="assests/Button.glb"> </a-asset-item>
+        <!-- Lab Desk by Colonel Cthulu [CC-BY] via Poly Pizza -->
+        <a-asset-item id="Desk" src="assests/Lab_Desk.glb"> </a-asset-item>
+        <!-- Scifi Pod by Quaternius -->
+        <a-asset-item id="ScifiPod" src="assests/Scifi Pod.glb"> </a-asset-item>
 
         <a-mixin
           id="xs-cube"
@@ -116,7 +120,6 @@
         width="6"
       >
         <!--  -->
-
         <a-entity position="-0 1.5 0 ">
           <a-box
             mixin="sm-cube"
@@ -124,8 +127,7 @@
             position="0 -0.5 0.05"
             run-toggle
           >
-            ></a-box
-          >
+          </a-box>
           <a-text value="Run" position="-0.2 0 0"> </a-text>
         </a-entity>
         <a-entity position="0 0 0">
@@ -211,6 +213,7 @@
         static-body
       >
       </a-box>
+      <!-- <a-gltf-model src="#Desk" position="2 1 -2"></a-gltf-model> -->
 
       <!-- Logic Gate Object -->
       <a-box
@@ -295,16 +298,16 @@
         grabbable
         hoverable
         material="color: white; wireframe: true; opacity: 0"
-        depth="0.12 "
-        height="0.2"
-        width="0.35"
+        depth="0.1 "
+        height="0.15"
+        width="0.28"
         rotation="-90 0 0"
         position="-1 1 -1"
       >
         <a-gltf-model
           input-button
           src="#Button"
-          position="-0.036 0.041 -0.003"
+          position="-0.086 0.041 -0.02"
           rotation="180 0 0"
           scale="0.008 0.008 0.005"
         >
@@ -319,14 +322,14 @@
         <a-gltf-model
           input-button
           src="#Button_case"
-          position="-0.06 0.06 -0.02"
+          position="-0.11 0.06 -0.02"
           rotation="180 0 0"
           scale="0.01 0.01 0.01"
         >
         </a-gltf-model>
 
         <a-box
-          position="0.1 0 -0.01"
+          position="0.05 0 -0.01"
           height="0.025"
           width="0.1"
           depth="0.02"
@@ -339,16 +342,16 @@
           draggable
           droppable
           logic-node
-          transmit-node
+          transmit-node="value:true"
           opacity="0"
           class="nodes transmit-node"
           color="white"
           scale="0.07 0.07 0.07"
           wireframe="true"
-          position="0.15 0 0"
+          position="0.1 0 0"
         >
           <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
-          <a-sphere color="white" scale="0.45 0.45 0.45"></a-sphere>
+          <a-sphere color="blue" scale="0.45 0.45 0.45"></a-sphere>
         </a-box>
       </a-box>
 

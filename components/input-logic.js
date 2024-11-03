@@ -11,7 +11,7 @@ AFRAME.registerComponent("input-logic", {
       return child.hasAttribute("transmit-node");
     });
     // const input = inputNodes[0].getAttribute("recieve-node").value;
-    outputNodes[0].setAttribute("transmit-node", "value", false);
+    // outputNodes[0].setAttribute("transmit-node", "value", false);
   },
 
   remove: function () {},
