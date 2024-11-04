@@ -15,7 +15,6 @@
     <!-- <script src="aframe-super-hands-component/dist/super-hands.min.js"></script> -->
     <!-- for deployment -->
     <script src="https://cdn.jsdelivr.net/gh/LugawPlain/aframe-super-hands-component@master/dist/super-hands.min.js"></script>
-
     <!-- Physics -->
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.1.0/dist/aframe-physics-system.min.js"></script>
     <!-- Event Set -->
@@ -355,6 +354,71 @@
         >
           <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
           <a-sphere color="blue" scale="0.45 0.45 0.45"></a-sphere>
+        </a-box>
+      </a-box>
+
+      <a-box
+        input-logic
+        logic-gate
+        class="interactable gates"
+        dynamic-body
+        grabbable
+        hoverable
+        material="color: white; wireframe: true; opacity: 0"
+        depth="0.1 "
+        height="0.15"
+        width="0.28"
+        rotation="-90 0 0"
+        position="1 1 -1"
+      >
+        <a-gltf-model
+          output-button
+          src="#Button"
+          position="0.016 0.041 -0.02"
+          rotation="180 0 0"
+          scale="0.008 0.008 0.005"
+        >
+          <a-text
+            value="Output"
+            color="yellow"
+            rotation="180 0 0"
+            position="-0.368 4.354 -7.602"
+            scale="20 20 20"
+          ></a-text
+        ></a-gltf-model>
+        <a-gltf-model
+          input-button
+          src="#Button_case"
+          position="-0.006 0.06 -0.02"
+          rotation="180 0 0"
+          scale="0.01 0.01 0.01"
+        >
+        </a-gltf-model>
+
+        <a-box
+          position="-0.05 0 -0.01"
+          height="0.025"
+          width="0.1"
+          depth="0.02"
+          material="color: black"
+        >
+        </a-box>
+
+        <a-box
+          hoverable
+          draggable
+          droppable
+          logic-node
+          recieve-node
+          opacity="0"
+          class="nodes recieve-node"
+          color="white"
+          scale="0.07 0.07 0.07"
+          wireframe="true"
+          position="-0.1 0 0"
+        >
+          <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
+          <a-sphere color="white" scale="0.45 0.45 0.45"></a-sphere>
         </a-box>
       </a-box>
 

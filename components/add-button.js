@@ -379,35 +379,56 @@ AFRAME.registerComponent("add-button", {
         </a-box>
       </a-box>`;
       const outputPlate = `
-      <a-box
-        output-logic
+         <a-box
+        input-logic
         logic-gate
         class="interactable gates"
         dynamic-body
         grabbable
         hoverable
-        material="color: white; wireframe: true;opacity:0"
-        depth="0.05"
-        height="0.3"
-        width="0.6"
+        material="color: white; wireframe: true; opacity: 0"
+        depth="0.1 "
+        height="0.15"
+        width="0.28"
         rotation="-90 0 0"
-        position="${spawnPos}"
+        position="1 1 -1"
       >
         <a-gltf-model
-          position="-0.3 -0.15 0"
-          src="#NOT_GATE_PLATE"
-          scale="0.02 0.02 0.04"
-          rotation="0 0 0"
-          material="color:red"
+          output-button
+          src="#Button"
+          position="0.016 0.041 -0.02"
+          rotation="180 0 0"
+          scale="0.008 0.008 0.005"
+        >
+          <a-text
+            value="Output"
+            color="yellow"
+            rotation="180 0 0"
+            position="-0.368 4.354 -7.602"
+            scale="20 20 20"
+          ></a-text
         ></a-gltf-model>
-        <a-text
-          value="Output"
-          color="yellow"
-          scale="0.5 0.5 0.5"
-          rotation="0 0 0"
-          position="-0.16 0 0"
-        ></a-text>
+        <a-gltf-model
+          input-button
+          src="#Button_case"
+          position="-0.006 0.06 -0.02"
+          rotation="180 0 0"
+          scale="0.01 0.01 0.01"
+        >
+        </a-gltf-model>
+
         <a-box
+          position="-0.05 0 -0.01"
+          height="0.025"
+          width="0.1"
+          depth="0.02"
+          material="color: black"
+        >
+        </a-box>
+
+        <a-box
+          hoverable
+          draggable
           droppable
           logic-node
           recieve-node
@@ -416,18 +437,13 @@ AFRAME.registerComponent("add-button", {
           color="white"
           scale="0.07 0.07 0.07"
           wireframe="true"
-          position="-0.3 0 -0.02"
+          position="-0.1 0 0"
         >
           <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
-          <a-sphere
-            id="node"
-            recieve-node
-            color="red"
-            scale="0.45 0.45 0.45"
-          ></a-sphere>
+          <a-sphere color="white" scale="0.45 0.45 0.45"></a-sphere>
         </a-box>
-    
-      </a-box>`;
+      </a-box>
+`;
 
       const sceneEl = document.querySelector("a-scene");
       const container = document.createElement("a-entity");

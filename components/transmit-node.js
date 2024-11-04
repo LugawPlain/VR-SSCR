@@ -7,7 +7,6 @@ AFRAME.registerComponent("transmit-node", {
     value: { type: "boolean", default: false },
   },
   init: function () {
-    console.log(this.el.object3D.uuid);
     this.sceneEl = this.el.sceneEl;
     this.dragStartFlag;
     this.onDragStart = this.onDragStart.bind(this);
@@ -45,22 +44,18 @@ AFRAME.registerComponent("transmit-node", {
     this.el.removeEventListener("hover-end", this.onHoverEnd);
   },
   onDragStart: function () {
-    console.log("drag-start");
     this.dragStartFlag = true;
     this.el.setAttribute("material", {
       color: "blue",
     });
   },
   onHoverStart: function () {
-    console.log("hover-start");
     this.el.setAttribute("material", {
       color: "white",
       opacity: 1,
     });
   },
   onHoverEnd: function () {
-    console.log("hover-end");
-
     if (!this.dragStartFlag) {
       this.el.setAttribute("material", {
         opacity: 0,
@@ -68,7 +63,6 @@ AFRAME.registerComponent("transmit-node", {
     }
   },
   onDragEnd: function (evt) {
-    console.log("drag-end");
     this.dragStartFlag = false;
     this.el.setAttribute("material", {
       opacity: 0,
@@ -76,7 +70,6 @@ AFRAME.registerComponent("transmit-node", {
   },
   onDragDrop: function (evt) {
     //transmitting second in event
-    console.log("dragdrop-transimiting");
     this.data.connectedTo = evt.detail.target;
     if (this.data.connectedTo.parentNode == this.el.parentNode) {
       this.data.connectedTo = null;

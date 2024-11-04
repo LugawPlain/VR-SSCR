@@ -50,9 +50,15 @@ AFRAME.registerComponent("line-follow", {
       });
     }
     const transmitNodeData = this.data.startEl.components["transmit-node"];
+    const recieveNodeData = this.data.endEl;
     if (transmitNodeData) {
       if (this.data.endElUuid !== transmitNodeData.data.connectedToUuid) {
-        console.log("removed");
+        if (recieveNodeData) {
+          recieveNodeData.setAttribute("recieve-node", "connectedTo", null);
+          recieveNodeData.setAttribute("recieve-node", "connectedToUuid", null);
+        } else {
+          console.log("no receiveNodeData");
+        }
         this.el.parentNode.removeChild(this.el);
       }
     }

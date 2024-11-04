@@ -10,7 +10,6 @@ AFRAME.registerComponent("recieve-node", {
     this.el.addEventListener("loaded", () => {
       this.updateTextValue();
     });
-    console.log(this.el.object3D.uuid);
     this.sceneEl = this.el.sceneEl;
     this.dragged = false;
     this.onDragOverStart = this.onDragOverStart.bind(this);
@@ -27,7 +26,8 @@ AFRAME.registerComponent("recieve-node", {
       this.el.removeEventListener("dragover-end", this.onDragOverEnd);
       this.el.removeEventListener("drag-drop", this.onDragDrop);
     }
-    if (this.data.connectedToUuid && this.data.connectedTo) {
+
+    if (this.data.connectedTo) {
       const inputEl = this.data.connectedTo;
       const inputComponent = inputEl.getAttribute("transmit-node");
 
@@ -36,6 +36,8 @@ AFRAME.registerComponent("recieve-node", {
       } else {
         this.data.value = false;
       }
+    } else {
+      this.data.value = false;
     }
 
     this.updateTextValue();
@@ -46,15 +48,12 @@ AFRAME.registerComponent("recieve-node", {
     this.el.removeEventListener("drag-drop", this.onDragDrop);
   },
   onDragOverStart: function () {
-    console.log("drag-over-start");
     this.el.setAttribute("material", {
       opacity: 1,
       color: "red",
     });
   },
   onDragOverEnd: function (evt) {
-    console.log("drag-over-end");
-
     this.el.setAttribute("material", {
       opacity: 0,
       color: "red",
@@ -62,7 +61,6 @@ AFRAME.registerComponent("recieve-node", {
   },
   onDragDrop: function (evt) {
     //recieve first before transmiting in evnt
-    console.log("drag-drop recieving node");
     this.dragged = true;
 
     this.data.connectedTo = evt.detail.dropped;
@@ -104,10 +102,8 @@ AFRAME.registerComponent("recieve-node", {
     if (textElement) {
       const newValue = this.data.value ? "1" : "0";
       textElement.setAttribute("value", newValue);
-      console.log(`Updated text value to: ${newValue}`);
     } else {
       console.log(this.el);
-      console.warn("No <a-text> element found in the entity.");
     }
   },
 });
