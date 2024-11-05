@@ -22,6 +22,8 @@ AFRAME.registerComponent("xor-logic", {
       } else {
         outputNodes[0].setAttribute("transmit-node", "value", true);
       }
+    } else {
+      outputNodes[0].setAttribute("transmit-node", "value", false);
     }
   },
 });

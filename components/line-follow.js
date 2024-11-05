@@ -34,9 +34,10 @@ AFRAME.registerComponent("line-follow", {
     // if (Globaltoggle) {
     //   return;
     // }
+
     const startEl = this.data.startEl;
     const endEl = this.data.endEl;
-
+    // track position
     if (startEl && endEl) {
       const startWorldPosition = new THREE.Vector3();
       const endWorldPosition = new THREE.Vector3();
@@ -49,6 +50,7 @@ AFRAME.registerComponent("line-follow", {
         end: `${endWorldPosition.x} ${endWorldPosition.y} ${endWorldPosition.z}`,
       });
     }
+    // track connectivity
     const transmitNodeData = this.data.startEl.components["transmit-node"];
     const recieveNodeData = this.data.endEl;
     if (transmitNodeData) {
@@ -62,6 +64,8 @@ AFRAME.registerComponent("line-follow", {
         this.el.parentNode.removeChild(this.el);
       }
     }
+    //
+
     // if (transmitNodeData.data.value) {
     //   this.el.setAttribute("line", {
     //     color: "blue",

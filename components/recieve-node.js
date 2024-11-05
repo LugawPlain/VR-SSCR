@@ -63,20 +63,22 @@ AFRAME.registerComponent("recieve-node", {
     //recieve first before transmiting in evnt
     this.dragged = true;
 
-    this.data.connectedTo = evt.detail.dropped;
-    if (this.data.connectedTo.parentNode == this.el.parentNode) {
+    if (evt.detail.dropped.parentNode == this.el.parentNode) {
       this.data.connectedTo = null;
       this.dragged = false;
       return;
     }
+    this.el.setAttribute("recieve-node", "connectedTo", evt.detail.dropped);
+
     const dropped = this.data.connectedTo;
-    this.data.connectedToUuid = this.data.connectedTo.object3D.uuid;
+    this.el.setAttribute(
+      "recieve-node",
+      "connectedToUuid",
+      this.data.connectedTo.object3D.uuid
+    );
     const droppedUuid = this.data.connectedToUuid;
-
     const target = evt.detail.target;
-
     const targetUuid = target.object3D.uuid;
-
     const connectLine = document.createElement("a-entity");
 
     connectLine.setAttribute("line", "");

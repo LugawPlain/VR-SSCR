@@ -1,5 +1,7 @@
 AFRAME.registerComponent("input-logic", {
-  schema: {},
+  schema: {
+    setOutput: { type: "boolean", default: true },
+  },
 
   init: function () {},
 
@@ -10,6 +12,11 @@ AFRAME.registerComponent("input-logic", {
     const outputNodes = Array.from(this.el.children).filter((child) => {
       return child.hasAttribute("transmit-node");
     });
+    if (this.data.setOutput) {
+      outputNodes[0].setAttribute("transmit-node", "value", true);
+    } else {
+      outputNodes[0].setAttribute("transmit-node", "value", false);
+    }
     // const input = inputNodes[0].getAttribute("recieve-node").value;
     // outputNodes[0].setAttribute("transmit-node", "value", false);
   },

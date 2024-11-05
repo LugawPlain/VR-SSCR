@@ -17,7 +17,7 @@ AFRAME.registerComponent("transmit-node", {
     this.onHoverEnd = this.onHoverEnd.bind(this);
   },
   update: function () {
-    if (this.data.setToggle) {
+    if (Globaltoggle) {
       this.el.addEventListener("drag-start", this.onDragStart);
       this.el.addEventListener("drag-end", this.onDragEnd);
       this.el.addEventListener("drag-drop", this.onDragDrop);
@@ -32,8 +32,14 @@ AFRAME.registerComponent("transmit-node", {
     }
     if (this.data.value) {
       this.el.children[0].setAttribute("value", "1");
+      if (this.data.connectedTo) {
+        this.data.connectedTo.setAttribute("recieve-node", "value", true);
+      }
     } else {
       this.el.children[0].setAttribute("value", "0");
+      if (this.data.connectedTo) {
+        this.data.connectedTo.setAttribute("recieve-node", "value", false);
+      }
     }
   },
   remove: function () {

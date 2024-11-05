@@ -41,6 +41,9 @@
     <script src="components/or-logic.js"></script>
     <script src="components/and-logic.js"></script>
     <script src="components/xor-logic.js"></script>
+    <script src="components/output-logic.js"></script>
+    <script src="components/input-button.js"></script>
+    <script src="components/output-button.js"></script>
   </head>
   <body>
     <a-scene id="scene" physics="gravity: -9.8">
@@ -134,9 +137,10 @@
         </a-entity>
         <a-entity position="0 0 0">
           <a-text value="Add Logic Gates" position="-0.8 0.6 0.0"></a-text>
+          <!--  -->
           <a-box
             add-button
-            class="interactable"
+            class="interactable selection"
             position="-2 0 0.05"
             selection
             mixin="sm-cube"
@@ -146,7 +150,7 @@
 
           <a-box
             add-button
-            class="interactable"
+            class="interactable selection"
             position="-1.2 0 0.05"
             selection
             mixin="sm-cube"
@@ -155,7 +159,7 @@
           ></a-box>
           <a-box
             add-button
-            class="interactable"
+            class="interactable selection"
             position=" -0.4 0  0.05"
             selection
             mixin="sm-cube"
@@ -164,7 +168,7 @@
           ></a-box>
           <a-box
             add-button
-            class="interactable"
+            class="interactable selection"
             position="0.4 0 0.05"
             selection
             mixin="sm-cube"
@@ -173,7 +177,7 @@
           ></a-box>
           <a-box
             add-button
-            class="interactable"
+            class="interactable selection"
             position="1.2 0 0.05"
             selection
             mixin="sm-cube"
@@ -182,7 +186,7 @@
           ></a-box>
           <a-box
             add-button
-            class="interactable"
+            class="interactable selection"
             position="2 0 0.05"
             selection
             mixin="sm-cube"
@@ -307,6 +311,8 @@
         position="-1 1 -1"
       >
         <a-gltf-model
+          class="interactable"
+          hoverable
           input-button
           src="#Button"
           position="-0.086 0.041 -0.02"
@@ -322,7 +328,6 @@
           ></a-text
         ></a-gltf-model>
         <a-gltf-model
-          input-button
           src="#Button_case"
           position="-0.11 0.06 -0.02"
           rotation="180 0 0"
@@ -358,7 +363,7 @@
       </a-box>
 
       <a-box
-        input-logic
+        output-logic
         logic-gate
         class="interactable gates"
         dynamic-body
@@ -387,7 +392,6 @@
           ></a-text
         ></a-gltf-model>
         <a-gltf-model
-          input-button
           src="#Button_case"
           position="-0.006 0.06 -0.02"
           rotation="180 0 0"
@@ -405,8 +409,6 @@
         </a-box>
 
         <a-box
-          hoverable
-          draggable
           droppable
           logic-node
           recieve-node

@@ -1,13 +1,20 @@
 AFRAME.registerComponent("add-button", {
+  schema: {
+    setToggle: { type: "boolean" },
+  },
   init: function () {
+    this.toggle = this.data.setToggle;
+
     this.el.addEventListener("click", (event) => {
       if (event.detail && event.detail.cursorEl) {
         return;
       }
+
       const spawnPos = "0 1.5 0";
       const gate = this.el.querySelector("a-text").getAttribute("value");
       const inputPlate = `
        <a-box
+        added
         input-logic
         logic-gate
         class="interactable gates"
@@ -21,13 +28,17 @@ AFRAME.registerComponent("add-button", {
         rotation="-90 0 0"
        position="${spawnPos}"
       >
-        <a-gltf-model
-          input-button
+        <!--position="-0.038  0.041 -0.02" -->
+        <a-gltf-model 
+          hoverable
+          button
           src="#Button"
-          position="-0.086 0.041 -0.02"
+          position="-0.086  0.041 -0.02"  
           rotation="180 0 0"
           scale="0.008 0.008 0.005"
         >
+            
+     
           <a-text
             value="Input"
             color="yellow"
@@ -36,6 +47,7 @@ AFRAME.registerComponent("add-button", {
             scale="20 20 20"
           ></a-text
         ></a-gltf-model>
+
         <a-gltf-model
           input-button
           src="#Button_case"
@@ -73,11 +85,12 @@ AFRAME.registerComponent("add-button", {
       </a-box>`;
       const notPlate = `
         <a-box
+        added
         not-logic
         logic-gate
         class="interactable gates"
         dynamic-body
-        grabbable
+      grabbable
         hoverable
         material="color: white; wireframe: true;opacity:0"
         depth="0.05"
@@ -138,12 +151,14 @@ AFRAME.registerComponent("add-button", {
         </a-box>
       </a-box>`;
       const orPlate = `
+      
         <a-box
+          added
         or-logic
         logic-gate
         class="interactable gates"
         dynamic-body
-        grabbable
+     grabbable
         hoverable
         material="color: white; wireframe: true;opacity:0"
         depth="0.05"
@@ -223,11 +238,12 @@ AFRAME.registerComponent("add-button", {
       const andPlate = `
      
       <a-box
+        added
         and-logic
         logic-gate
         class="interactable gates"
         dynamic-body
-        grabbable
+       grabbable
         hoverable
         material="color: white; wireframe: true;opacity:0"
         depth="0.05"
@@ -305,12 +321,14 @@ AFRAME.registerComponent("add-button", {
         </a-box>
       </a-box>`;
       const xorPlate = `
+
       <a-box
+        added
         xor-logic
         logic-gate
         class="interactable gates"
         dynamic-body
-        grabbable
+   grabbable
         hoverable
         material="color: white; wireframe: true;opacity:0"
         depth="0.05"
@@ -380,11 +398,12 @@ AFRAME.registerComponent("add-button", {
       </a-box>`;
       const outputPlate = `
          <a-box
+           added
         input-logic
         logic-gate
         class="interactable gates"
         dynamic-body
-        grabbable
+    grabbable
         hoverable
         material="color: white; wireframe: true; opacity: 0"
         depth="0.1 "
@@ -427,8 +446,6 @@ AFRAME.registerComponent("add-button", {
         </a-box>
 
         <a-box
-          hoverable
-          draggable
           droppable
           logic-node
           recieve-node
@@ -468,10 +485,30 @@ AFRAME.registerComponent("add-button", {
           container.innerHTML = outputPlate;
           break;
         default:
-          console.log("Error with selection");
+          console.warn(`Unknown gate type: ${gate}`);
+          return;
       }
 
+      const addedEl = container.querySelector("[added]");
       sceneEl.appendChild(container);
+      // grabbable component cant be dynamically off dunno why
+
+      // setTimeout(() => {
+      //   if (this.toggle) {
+      //     // Remove grabbable component using proper A-Frame method
+      //     addedEl.removeAttribute("grabbable");
+      //     // Also remove the component system
+      //     // addedEl.components.grabbable.remove();
+      //     // Force component cleanup
+
+      //     console.log("Removed grabbable component", addedEl);
+      //   }
+      // }, 0);
+      addedEl.removeAttribute("added");
     });
+  },
+  update: function () {
+    this.toggle = this.data.setToggle;
+    console.log("this.toggle update", this.toggle);
   },
 });

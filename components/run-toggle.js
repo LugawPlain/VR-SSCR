@@ -1,3 +1,4 @@
+let runState = false;
 AFRAME.registerComponent("run-toggle", {
   schema: {
     toggle: { type: "boolean", default: false },
