@@ -44,11 +44,12 @@
     <script src="components/output-logic.js"></script>
     <script src="components/input-button.js"></script>
     <script src="components/output-button.js"></script>
+    <script src="components/my-model.js"></script>
   </head>
   <body>
     <a-scene id="scene" physics="gravity: -9.8">
       <!-- Camera -->
-      <a-camera position="0 1.2 1">
+      <a-camera position="0 1.5 1">
         <!-- Cursor -->
         <a-cursor
           raycaster="showLine: true;objects: .interactable"
@@ -82,9 +83,35 @@
         </a-asset-item>
         <a-asset-item id="Button" src="assests/Button.glb"> </a-asset-item>
         <!-- Lab Desk by Colonel Cthulu [CC-BY] via Poly Pizza -->
-        <a-asset-item id="Desk" src="assests/Lab_Desk.glb"> </a-asset-item>
+        <a-asset-item id="Scifi_Desk" src="assests/scifi_desk.glb">
+        </a-asset-item>
         <!-- Scifi Pod by Quaternius -->
-        <a-asset-item id="ScifiPod" src="assests/Scifi Pod.glb"> </a-asset-item>
+        <a-asset-item id="Scifi_Pod" src="assests/Scifi Pod.glb">
+        </a-asset-item>
+        <a-asset-item id="RPI" src="assests/raspberry.glb"> </a-asset-item>
+        <a-asset-item id="ESP32" src="assests/esp32.glb"> </a-asset-item>
+        <a-asset-item id="Arduino" src="assests/arduino_uno.glb">
+        </a-asset-item>
+
+        <a-asset-item id="Arduino" src="assests/arduino_uno.glb">
+        </a-asset-item>
+        <a-asset-item id="Scifi_Control" src="assests/display_terminal.glb">
+        </a-asset-item>
+        <!-- <a-asset-item id="Scifi_Control2" src="assests/scifi.glb">
+        </a-asset-item> -->
+        <a-asset-item id="Scifi_Floor" src="assests/scifi_floor.glb">
+        </a-asset-item
+        ><a-asset-item id="Scifi_Table" src="assests/sci-fi_table.glb">
+        </a-asset-item>
+        <a-asset-item
+          id="Scifi_Table_Simple"
+          src="assests/sci-fi_table_simple.glb"
+        >
+        </a-asset-item>
+        <a-asset-item id="Scifi_Floor" src="assests/scifi_floor.glb">
+        </a-asset-item
+        ><a-asset-item id="Scifi_Floor" src="assests/scifi_floor.glb">
+        </a-asset-item>
 
         <a-mixin
           id="xs-cube"
@@ -111,106 +138,209 @@
           geometry="width:2.0;height:2.0;depth:2.0"
         ></a-mixin>
       </a-assets>
-
+      <!-- Lights -->
+      <!-- <a-entity light="type:ambient ; intensity:0.2"></a-entity> -->
       <!-- Environment -->
 
-      <a-entity environment="preset:japan   ;gridColor:#6b6b6b"></a-entity>
+      <a-entity environment="preset:japan  ;gridColor:#6b6b6b"></a-entity>
 
       <!-- Gui Menu -->
 
       <a-plane
-        position="0 2.7 -5.5"
-        material="color:black;opacity:1"
-        height="4"
-        width="6"
+        src="assests/UI.png"
+        position="-2.3 1.15 0.52"
+        rotation="-50 90 0"
+        height="0.8"
+        width="1.5"
       >
-        <!--  -->
-
-        <a-entity position="0 0 0">
-          <a-text value="Add Logic Gates" position="-0.8 0.6 0.0"></a-text>
-          <!--  -->
-          <a-box
+        <a-entity>
+          <a-circle
+            position="-0.475 0.105 0.0001"
+            radius="0.05"
+            color="#20e5f6"
             add-button
             class="interactable selection"
-            position="-2 0 0.05"
-            selection
-            mixin="sm-cube"
-            color="white"
-            ><a-text value="Input" position="-0.28 0 0.2"></a-text
-          ></a-box>
-
-          <a-box
-            add-button
-            class="interactable selection"
-            position="-1.2 0 0.05"
-            selection
-            mixin="sm-cube"
-            color="white"
-            ><a-text value="NOT" position="-0.25 0 0.2"></a-text
-          ></a-box>
-          <a-box
-            add-button
-            class="interactable selection"
-            position=" -0.4 0  0.05"
-            selection
-            mixin="sm-cube"
-            color="white"
-            ><a-text value="OR" position="-0.17 0 0.2"></a-text
-          ></a-box>
-          <a-box
-            add-button
-            class="interactable selection"
-            position="0.4 0 0.05"
-            selection
-            mixin="sm-cube"
-            color="white"
-            ><a-text value="AND" position="-0.25 0 0.2"></a-text
-          ></a-box>
-          <a-box
-            add-button
-            class="interactable selection"
-            position="1.2 0 0.05"
-            selection
-            mixin="sm-cube"
-            color="white"
-            ><a-text value="XOR" position="-0.25 0 0.2"></a-text
-          ></a-box>
-          <a-box
-            add-button
-            class="interactable selection"
-            position="2 0 0.05"
-            selection
-            mixin="sm-cube"
-            color="white"
-            ><a-text value="Output" position="-0.3 0 0.2"></a-text
-          ></a-box>
-        </a-entity>
-
-        <a-entity position="-0 -0.5 0 ">
-          <a-box
-            mixin="xs-cube"
-            class="interactable"
-            position="0 -0.5 0.05"
-            grab_connect-toggle
           >
-            ></a-box
+            <a-text value="Input" opacity="0" visible="false"></a-text>
+          </a-circle>
+          <a-circle
+            position="-0.285 0.105 0.0001"
+            radius="0.05"
+            color="#20e5f6"
+            add-button
+            class="interactable selection"
           >
-          <a-text value="Grab Mode" position="-0.5 -0.1 0"> </a-text>
+            <a-text value="NOT" opacity="0" visible="false"></a-text>
+          </a-circle>
+          <a-circle
+            position="-0.095 0.105 0.0001"
+            radius="0.05"
+            color="#20e5f6"
+            add-button
+            class="interactable selection"
+          >
+            <a-text value="OR" opacity="0" visible="false"></a-text>
+          </a-circle>
+          <a-circle
+            position="0.095 0.105 0.0001"
+            radius="0.05"
+            color="#20e5f6"
+            add-button
+            class="interactable selection"
+          >
+            <a-text value="AND" opacity="0" visible="false"></a-text>
+          </a-circle>
+          <a-circle
+            position="0.285 0.105 0.0001"
+            radius="0.05"
+            color="#20e5f6"
+            add-button
+            class="interactable selection"
+          >
+            <a-text value="XOR" opacity="0" visible="false"></a-text>
+          </a-circle>
+          <a-circle
+            position="0.475 0.105 0.0001"
+            radius="0.05"
+            color="#20e5f6"
+            add-button
+            class="interactable selection"
+          >
+            <a-text value="Output" opacity="0" visible="false"></a-text>
+          </a-circle>
         </a-entity>
+        <a-circle
+          position="0 -0.2 0.001"
+          radius="0.08"
+          grab_connect-toggle
+          class="interactable"
+          visible="false"
+          hoverable
+        ></a-circle>
+        <a-circle
+          id="animation-circle"
+          visible="false"
+          radius="0.003"
+          position="0.001 -0.15 0.0003"
+          color="#8c52ff"
+        >
+        </a-circle>
+        <a-plane
+          id="grabbingtext"
+          src="assests/Grabbing Enabled.png"
+          position="0 -0.05 0.0001"
+          width="0.423"
+          height="0.046"
+          visible="true"
+        ></a-plane>
+        <a-plane
+          id="connectingtext"
+          src="assests/Connecting Enabled.png"
+          position="0 -0.05 0.01"
+          width="0.439"
+          height="0.043"
+          visible="false"
+        ></a-plane>
+        <a-plane
+          id="grabbingradio"
+          src="assests/Grabbing Enabled Radio.png"
+          position="0 -0.15 0.0001"
+          width="0.139"
+          height="0.133"
+          visible="true"
+        >
+        </a-plane>
+        <a-plane
+          id="connectingradio"
+          src="assests/Connecting Enabled Radio.png"
+          position="0.003 -0.15 0.0001"
+          width="0.149"
+          height="0.142"
+          visible="false"
+        >
+        </a-plane>
       </a-plane>
 
+      <a-gltf-model
+        src="#Scifi_Control"
+        my-model
+        scale="0.7 0.5 0.5 "
+        position="-2.5 0.8 0.5"
+        rotation="0 90 0"
+      ></a-gltf-model>
       <!-- Table -->
-      <a-box
-        position="0 0.7 -3"
-        height="0.2"
-        width="6"
-        depth="5"
+      <a-plane
+        position="0 0.83 -2.485"
+        rotation="-90 0 0"
+        height="3"
+        width="5.5"
         material="color:gray;"
-        rotation="2 0 0"
+        static-body
+        opacity="0"
+      >
+      </a-plane>
+      <a-gltf-model
+        src="#Scifi_Table"
+        position="0.5 0.844 -2.8"
+        scale="0.7 0.3 0.7"
+        rotation="0 90 0"
         static-body
       >
-      </a-box>
-      <!-- <a-gltf-model src="#Desk" position="2 1 -2"></a-gltf-model> -->
+      </a-gltf-model>
+
+      <!-- <a-gltf-model
+        src="#Scifi_Desk"
+        position=" -7.255 1.942 12.246"
+        rotation="0 90 0"
+        scale="5 1 5"
+        static-body
+      ></a-gltf-model> -->
+
+      <a-gltf-model
+        src="#Scifi_Pod"
+        position="1 0.000 3"
+        scale="0.3 0.25 0.3"
+        rotation="0 90 0"
+      >
+        <a-gltf-model
+          check-hover
+          src="#Arduino"
+          position="0 3.451 0"
+          rotation="-90 0 90"
+          scale="0.8 0.8 0.8"
+        >
+        </a-gltf-model>
+      </a-gltf-model>
+      <a-gltf-model
+        src="#Scifi_Pod"
+        position="0 0.000 3"
+        scale="0.3 0.25 0.3"
+        rotation="0 90 0"
+      >
+        <a-gltf-model
+          check-hover
+          src="#ESP32"
+          position="0 3.638 0"
+          rotation="0 0 0"
+          scale="0.4 0.4 0.4"
+        >
+        </a-gltf-model>
+      </a-gltf-model>
+      <a-gltf-model
+        src="#Scifi_Pod"
+        position="-1 0.000 3"
+        scale="0.3 0.25 0.3"
+        rotation="0 90 0"
+      >
+        <a-gltf-model
+          check-hover
+          src="#RPI"
+          position="0.105 3.644 -0.391"
+          rotation="-50 3 58"
+          scale="0.01 0.01 0.01"
+        >
+        </a-gltf-model>
+      </a-gltf-model>
 
       <!-- Logic Gate Object -->
       <a-box
@@ -350,68 +480,6 @@
         >
           <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
           <a-sphere color="blue" scale="0.45 0.45 0.45"></a-sphere>
-        </a-box>
-      </a-box>
-
-      <a-box
-        output-logic
-        logic-gate
-        class="interactable gates"
-        dynamic-body
-        grabbable
-        hoverable
-        material="color: white; wireframe: true; opacity: 0"
-        depth="0.1 "
-        height="0.15"
-        width="0.28"
-        rotation="-90 0 0"
-        position="1 1 -1"
-      >
-        <a-gltf-model
-          output-button
-          src="#Button"
-          position="0.016 0.041 -0.02"
-          rotation="180 0 0"
-          scale="0.008 0.008 0.005"
-        >
-          <a-text
-            value="Output"
-            color="yellow"
-            rotation="180 0 0"
-            position="-0.368 4.354 -7.602"
-            scale="20 20 20"
-          ></a-text
-        ></a-gltf-model>
-        <a-gltf-model
-          src="#Button_case"
-          position="-0.006 0.06 -0.02"
-          rotation="180 0 0"
-          scale="0.01 0.01 0.01"
-        >
-        </a-gltf-model>
-
-        <a-box
-          position="-0.05 0 -0.01"
-          height="0.025"
-          width="0.1"
-          depth="0.02"
-          material="color: black"
-        >
-        </a-box>
-
-        <a-box
-          droppable
-          logic-node
-          recieve-node
-          opacity="0"
-          class="nodes recieve-node"
-          color="white"
-          scale="0.07 0.07 0.07"
-          wireframe="true"
-          position="-0.1 0 0"
-        >
-          <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
-          <a-sphere color="white" scale="0.45 0.45 0.45"></a-sphere>
         </a-box>
       </a-box>
 

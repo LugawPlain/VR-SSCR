@@ -26,7 +26,7 @@ AFRAME.registerComponent("add-button", {
         height="0.15"
         width="0.28"
         rotation="-90 0 0"
-       position="${spawnPos}"
+        position="${spawnPos}"
       >
         <!--position="-0.038  0.041 -0.02" -->
         <a-gltf-model 
@@ -335,7 +335,7 @@ AFRAME.registerComponent("add-button", {
         height="0.3"
         width="0.6"
         rotation="-90 0 0"
-        position="0 1 -1"
+        position="${spawnPos}"
       >
         <a-gltf-model
           position="-0.3 -0.15 0"
@@ -397,20 +397,19 @@ AFRAME.registerComponent("add-button", {
         </a-box>
       </a-box>`;
       const outputPlate = `
-         <a-box
-           added
-        input-logic
+            <a-box
+        output-logic
         logic-gate
         class="interactable gates"
         dynamic-body
-    grabbable
+        grabbable
         hoverable
         material="color: white; wireframe: true; opacity: 0"
         depth="0.1 "
         height="0.15"
         width="0.28"
         rotation="-90 0 0"
-        position="1 1 -1"
+        position="${spawnPos}"
       >
         <a-gltf-model
           output-button
@@ -428,7 +427,6 @@ AFRAME.registerComponent("add-button", {
           ></a-text
         ></a-gltf-model>
         <a-gltf-model
-          input-button
           src="#Button_case"
           position="-0.006 0.06 -0.02"
           rotation="180 0 0"
@@ -501,7 +499,6 @@ AFRAME.registerComponent("add-button", {
       //     // addedEl.components.grabbable.remove();
       //     // Force component cleanup
 
-      //     console.log("Removed grabbable component", addedEl);
       //   }
       // }, 0);
       addedEl.removeAttribute("added");
@@ -509,6 +506,5 @@ AFRAME.registerComponent("add-button", {
   },
   update: function () {
     this.toggle = this.data.setToggle;
-    console.log("this.toggle update", this.toggle);
   },
 });

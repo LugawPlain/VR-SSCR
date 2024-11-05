@@ -6,40 +6,46 @@ AFRAME.registerComponent("grab_connect-toggle", {
   init: function () {
     this.isMouseDown = false;
     this.isMouseEnter = false;
-
+    this.parentNode = this.el.parentNode;
     const position = this.el.getAttribute("position");
     this.originalPosition = { x: position.x, y: position.y, z: position.z };
     const newPositionZ = this.originalPosition.z - 0.1;
-
+    this.circle = this.parentNode.querySelector("#animation-circle");
     this.el.addEventListener("mouseenter", () => {
-      console.log("mouse enter");
       this.isMouseEnter = true;
-      if (!this.isMouseDown) {
-        this.el.setAttribute("material", { opacity: 0.8, color: "orange" });
-      }
+
+      this.circle.setAttribute("visible", true);
+      this.circle.setAttribute("animation", {
+        enabled: true,
+        property: "geometry.radius",
+        from: 0.03,
+        to: 0.05,
+        dur: 500,
+        easing: "easeOutQuad",
+        loop: true,
+      });
     });
     this.el.addEventListener("mouseleave", () => {
-      console.log("mouse leave");
       this.isMouseEnter = false;
-      if (!this.isMouseDown && !this.data.toggle) {
-        this.el.setAttribute("material", { opacity: 0.8, color: "white" });
-      }
+
+      this.circle.setAttribute("animation", {
+        enabled: false,
+      });
+      this.circle.setAttribute("visible", false);
     });
 
     this.el.addEventListener("mousedown", (event) => {
       if (event.detail && event.detail.cursorEl) {
         return;
       }
-      console.log("mouse down");
       this.isMouseDown = true;
-      this.el.setAttribute("material", { opacity: 0.8, color: "red" });
-
-      this.el.setAttribute("animation", {
-        property: "position",
-        from: `${this.originalPosition.x} ${this.originalPosition.y} ${this.originalPosition.z}`,
-        to: `${this.originalPosition.x} ${this.originalPosition.y} ${newPositionZ}`,
-        dur: 200,
-        easing: "easeOutQuad",
+      this.circle.setAttribute("animation", {
+        enabled: false,
+      });
+      this.circle.setAttribute("visible", true);
+      this.circle.setAttribute("radius", "0.03");
+      this.circle.setAttribute("animation", {
+        enabled: false,
       });
     });
 
@@ -47,44 +53,53 @@ AFRAME.registerComponent("grab_connect-toggle", {
       if (event.detail && event.detail.cursorEl) {
         return;
       }
-      console.log("mouse up");
+      if (!this.isMouseDown) return;
+      if (!this.isMouseEnter) {
+        this.circle.setAttribute("animation", {
+          enabled: false,
+        });
+        this.circle.setAttribute("visible", false);
+      }
+
       if (!this.isMouseDown) {
         return;
       }
       this.isMouseDown = false;
 
-      if (this.data.toggle) {
-        this.el.setAttribute("animation", {
-          property: "position",
-          from: `${this.originalPosition.x} ${this.originalPosition.y} ${newPositionZ}`,
-          to: `${this.originalPosition.x} ${this.originalPosition.y} ${this.originalPosition.z}`,
-          dur: 200,
-          easing: "easeOutQuad",
-        });
-        this.data.toggle = false;
-        Globaltoggle = false;
-      } else {
+      this.circle.setAttribute("animation", {
+        enabled: false,
+      });
+
+      if (!this.data.toggle) {
+        this.circle.setAttribute("color", "#00c2cb");
         this.data.toggle = true;
         Globaltoggle = true;
+      } else {
+        this.circle.setAttribute("color", "#8c52ff");
+        this.data.toggle = false;
+        Globaltoggle = false;
       }
+
       this.setToggle(this.data.toggle);
       this.changeText(this.data.toggle);
-
-      if (!this.isMouseEnter) {
-        this.el.setAttribute("material", { opacity: 0.8, color: "white" });
-      } else {
-        this.el.setAttribute("material", { opacity: 0.8, color: "orange" });
-      }
     });
   },
+
   changeText: function (toggle) {
-    const textEntity = this.el.parentNode.querySelector("a-text");
+    const context = this.parentNode.querySelector("#connectingtext");
+    const conradio = this.parentNode.querySelector("#connectingradio");
+    const grabtext = this.parentNode.querySelector("#grabbingtext");
+    const grabradio = this.parentNode.querySelector("#grabbingradio");
     if (toggle) {
-      textEntity.setAttribute("value", "Connect Mode");
-      textEntity.setAttribute("position", "-0.7 -0.1 0");
+      context.setAttribute("material", "visible", true);
+      conradio.setAttribute("visible", true);
+      grabtext.setAttribute("material", false);
+      grabradio.setAttribute("visible", false);
     } else {
-      textEntity.setAttribute("value", "Grab Mode");
-      textEntity.setAttribute("position", "-0.5 -0.1 0");
+      context.setAttribute("material", "visible", false);
+      conradio.setAttribute("visible", false);
+      grabtext.setAttribute("material", true);
+      grabradio.setAttribute("visible", true);
     }
   },
   setToggle: function (toggle) {
