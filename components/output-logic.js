@@ -17,8 +17,6 @@ AFRAME.registerComponent("output-logic", {
     const input = inputNodes[0].getAttribute("recieve-node").value;
     inputNodes[0].setAttribute("transmit-node", "value", input);
     const output = this.el.querySelector("[output-button]");
-    console.log(output);
-    console.log(input);
 
     output.setAttribute("output-button", "setOutput", input);
   },

@@ -105,7 +105,6 @@ AFRAME.registerComponent("recieve-node", {
       const newValue = this.data.value ? "1" : "0";
       textElement.setAttribute("value", newValue);
     } else {
-      console.log(this.el);
     }
   },
 });
