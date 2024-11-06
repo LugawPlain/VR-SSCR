@@ -75,7 +75,11 @@ AFRAME.registerComponent("transmit-node", {
     });
   },
   onDragDrop: function (evt) {
+    console.log("transmit drag drop");
     //transmitting second in event
+    if (evt.detail.target.hasAttribute("transmit-node")) {
+      return;
+    }
     this.data.connectedTo = evt.detail.target;
     if (this.data.connectedTo.parentNode == this.el.parentNode) {
       this.data.connectedTo = null;
