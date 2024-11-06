@@ -21,6 +21,7 @@
     <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
     <!-- GUI -->
     <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe-stats-in-vr-component@master/dist/aframe-stats-in-vr-component.min.js"></script>
     <!-- Bounding Box -->
     <!-- Components -->
     <script src="components/error.handler.js"></script>
@@ -47,16 +48,17 @@
   </head>
   <body>
     <a-scene
+      stats-in-vr
       error-handler
       id="scene"
-      physics="driver: local; gravity: -9.8;"
-      shadow="type:pcfsoft"
+      physics="driver: local; gravity: -9.8; maxSubSteps: 1; iterations: 1;"
+      shadow="type: pcfsoft; cast: false; receive: true;"
     >
       <!-- Camera -->
       <a-camera position="0 1.5 1">
         <!-- Cursor -->
         <a-cursor
-          raycaster="showLine: true;objects: .interactable"
+          raycaster="far: 5; interval: 100; objects: .interactable"
           position="0 0 -0.2"
           scale="0.15 0.15 0.15"
           super-hands="colliderEvent: raycaster-intersection;
@@ -148,9 +150,10 @@
         rotation="0 180 -0.2"
         scale="1 1 1"
         shader="flat"
+        lod="maxLevel: 2; distance: 15, 30"
       ></a-gltf-model>
       <a-light
-        light="castShadow:true ;shadowRadius:3;shadowBias:-0.001;distance:50"
+        light="castShadow:false ;shadowRadius:3;shadowBias:-0.001;distance:50"
         type="point"
         intensity="0.6"
         position="0 5 -2"
