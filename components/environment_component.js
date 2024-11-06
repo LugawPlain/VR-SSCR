@@ -4,7 +4,7 @@ AFRAME.registerComponent("environment_component", {
   init: function () {
     const children = this.el.children;
     for (let i = 0; i < children.length; i++) {
-      console.log(children[i]);
+      // console.log(children[i]);
     }
   },
 

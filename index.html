@@ -22,20 +22,18 @@
     <!-- GUI -->
     <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
     <!-- Bounding Box -->
-    <script src="https://unpkg.com/aframe-bounding-box-component"></script>
     <!-- Components -->
-    <script src="components/selection.js"></script>
-    <script src="components/logic-gate.js"></script>
-    <script src="components/container-box.js"></script>
-    <script src="components/auto-box.js"></script>
-    <script src="components/add-button.js"></script>
-    <!-- <script src="rotate-button.js"></script> -->
+    <script src="components/error.handler.js"></script>
+    <script src="components/my-model.js"></script>
+    <script src="components/environment_component.js"></script>
     <script src="components/grab_connect-toggle.js"></script>
+    <script src="components/selection.js"></script>
+    <script src="components/add-button.js"></script>
+    <script src="components/logic-gate.js"></script>
     <script src="components/logic-node.js"></script>
     <script src="components/transmit-node.js"></script>
     <script src="components/recieve-node.js"></script>
     <script src="components/line-follow.js"></script>
-    <script src="components/run-toggle.js"></script>
     <script src="components/input-logic.js"></script>
     <script src="components/not-logic.js"></script>
     <script src="components/or-logic.js"></script>
@@ -44,13 +42,16 @@
     <script src="components/output-logic.js"></script>
     <script src="components/input-button.js"></script>
     <script src="components/output-button.js"></script>
-    <script src="components/my-model.js"></script>
-    <script src="components/environment_component.js"></script>
     <script src="components/check-hover.js"></script>
     <script src="components/check-display.js"></script>
   </head>
   <body>
-    <a-scene id="scene" physics="gravity: -9.8" shadow="type:pcfsoft">
+    <a-scene
+      error-handler
+      id="scene"
+      physics="driver: local; gravity: -9.8;"
+      shadow="type:pcfsoft"
+    >
       <!-- Camera -->
       <a-camera position="0 1.5 1">
         <!-- Cursor -->
@@ -67,56 +68,45 @@
         ></a-cursor>
       </a-camera>
 
-      <!-- Assests -->
+      <!-- assets -->
       <a-assets>
-        <!-- <a-asset-item id="NOT_GATE" src="assests/NOT_GATE.glb"> </a-asset-item>
-        <a-asset-item id="LGPlate" src="assests/LGPlate.glb"> </a-asset-item> -->
-        <a-asset-item id="AND_GATE_PLATE" src="assests/AND_GATE_PLATE.glb">
+        <a-asset-item id="AND_GATE_PLATE" src="assets/AND_GATE_PLATE.glb">
         </a-asset-item>
-
-        <a-asset-item id="NOT_GATE_PLATE" src="assests/NOT_GATE_PLATE.glb">
+        <a-asset-item id="NOT_GATE_PLATE" src="assets/NOT_GATE_PLATE.glb">
         </a-asset-item>
-
-        <a-asset-item id="OR_GATE_PLATE" src="assests/OR_GATE_PLATE.glb">
+        <a-asset-item id="OR_GATE_PLATE" src="assets/OR_GATE_PLATE.glb">
         </a-asset-item>
-
-        <a-asset-item id="XOR_GATE_PLATE" src="assests/XOR_GATE_PLATE.glb">
+        <a-asset-item id="XOR_GATE_PLATE" src="assets/XOR_GATE_PLATE.glb">
         </a-asset-item>
-        <a-asset-item id="Button_case" src="assests/Button Case.glb">
+        <a-asset-item id="Button_case" src="assets/Button Case.glb">
         </a-asset-item>
-        <a-asset-item id="Button" src="assests/Button.glb"> </a-asset-item>
+        <a-asset-item id="Button" src="assets/Button.glb"> </a-asset-item>
         <!-- Lab Desk by Colonel Cthulu [CC-BY] via Poly Pizza -->
-        <a-asset-item id="Scifi_Desk" src="assests/scifi_desk.glb">
+        <a-asset-item id="Scifi_Desk" src="assets/scifi_desk.glb">
         </a-asset-item>
         <!-- Scifi Pod by Quaternius -->
-        <a-asset-item id="Scifi_Pod" src="assests/Scifi Pod.glb">
+        <a-asset-item id="Scifi_Pod" src="assets/Scifi Pod.glb"> </a-asset-item>
+        <a-asset-item id="RPI" src="assets/raspberry.glb"> </a-asset-item>
+        <a-asset-item id="ESP32" src="assets/esp32.glb"> </a-asset-item>
+        <a-asset-item id="Arduino" src="assets/arduino_uno.glb"> </a-asset-item>
+        <a-asset-item id="Scifi_Control" src="assets/display_terminal.glb">
         </a-asset-item>
-        <a-asset-item id="RPI" src="assests/raspberry.glb"> </a-asset-item>
-        <a-asset-item id="ESP32" src="assests/esp32.glb"> </a-asset-item>
-        <a-asset-item id="Arduino" src="assests/arduino_uno.glb">
+        <a-asset-item id="Scifi_Table" src="assets/sci-fi_table.glb">
         </a-asset-item>
-
-        <a-asset-item id="Arduino" src="assests/arduino_uno.glb">
+        <a-asset-item id="ScifiCorridor" src="assets/Scifi_Corridor.glb">
         </a-asset-item>
-        <a-asset-item id="Scifi_Control" src="assests/display_terminal.glb">
-        </a-asset-item>
-        <!-- <a-asset-item id="Scifi_Control2" src="assests/scifi.glb">
-        </a-asset-item> -->
-        <a-asset-item id="Scifi_Floor" src="assests/scifi_floor.glb">
-        </a-asset-item
-        ><a-asset-item id="Scifi_Table" src="assests/sci-fi_table.glb">
-        </a-asset-item>
-        <a-asset-item
-          id="Scifi_Table_Simple"
-          src="assests/sci-fi_table_simple.glb"
-        >
-        </a-asset-item>
-        <a-asset-item id="Scifi_Floor" src="assests/scifi_floor.glb">
-        </a-asset-item
-        ><a-asset-item id="Scifi_Floor" src="assests/scifi_floor.glb">
-        </a-asset-item>
-        <a-asset-item id="ScifiCorridor" src="assests/Scifi_Corridor.glb">
-        </a-asset-item>
+        <img id="UI" src="assets/UI.png" />
+        <img id="GrabbingEnabled" src="assets/Grabbing Enabled.png" />
+        <img
+          id="GrabbingEnabledRadio"
+          src="assets/Grabbing Enabled Radio.png"
+        />
+        <img id="ConnectingEnabled" src="assets/Connecting Enabled.png" />
+        <img
+          id="ConnectingEnabledRadio"
+          src="assets/Connecting Enabled Radio.png"
+        />
+        <img id="CheckDisplay" src="assets/check-display.png" />
 
         <a-mixin
           id="xs-cube"
@@ -169,7 +159,7 @@
 
       <a-plane
         material="emissive:#0000ff;emissiveIntensity:0.2 "
-        src="assests/UI.png"
+        src="#UI"
         position="-2.3 1.15 0.52"
         rotation="-50 90 0"
         height="0.8"
@@ -291,7 +281,7 @@
         </a-circle>
         <a-plane
           id="grabbingtext"
-          src="assests/Grabbing Enabled.png"
+          src="#GrabbingEnabled"
           position="0 -0.05 0.0001"
           width="0.423"
           height="0.046"
@@ -299,7 +289,7 @@
         ></a-plane>
         <a-plane
           id="connectingtext"
-          src="assests/Connecting Enabled.png"
+          src="#ConnectingEnabled"
           position="0 -0.05 0.01"
           width="0.439"
           height="0.043"
@@ -307,7 +297,7 @@
         ></a-plane>
         <a-plane
           id="grabbingradio"
-          src="assests/Grabbing Enabled Radio.png"
+          src="#GrabbingEnabledRadio"
           position="0 -0.15 0.0001"
           width="0.139"
           height="0.133"
@@ -316,7 +306,7 @@
         </a-plane>
         <a-plane
           id="connectingradio"
-          src="assests/Connecting Enabled Radio.png"
+          src="ConnectingEnabledRadio"
           position="0.003 -0.15 0.0001"
           width="0.149"
           height="0.142"
@@ -392,7 +382,7 @@
         <a-plane
           check-display
           visible="false"
-          src="assests/check-display.png"
+          src="#CheckDisplay"
           width="6.268"
           height="3.456"
           rotation="0 -90 0"
@@ -449,7 +439,7 @@
         <a-plane
           check-display
           visible="false"
-          src="assests/check-display.png"
+          src="#CheckDisplay"
           width="6.268"
           height="3.456"
           rotation="0 -90 0"
@@ -507,7 +497,7 @@
         <a-plane
           check-display
           visible="false"
-          src="assests/check-display.png"
+          src="#CheckDisplay"
           width="6.268"
           height="3.456"
           rotation="0 -90 0"
@@ -689,5 +679,21 @@
         opacity="0"
       ></a-plane>
     </a-scene>
+    <script>
+      document.querySelector("a-scene").addEventListener("loaded", function () {
+        console.log("Scene loaded");
+        document
+          .querySelector("a-assets")
+          .addEventListener("loaded", function () {
+            console.log("Assets loaded");
+          });
+
+        document
+          .querySelector("a-assets")
+          .addEventListener("timeout", function () {
+            console.log("Assets timed out");
+          });
+      });
+    </script>
   </body>
 </html>

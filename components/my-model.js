@@ -18,9 +18,9 @@ AFRAME.registerComponent("my-model", {
       model.traverse((node) => {
         if (node.isMesh) {
           if (node.material instanceof THREE.MeshStandardMaterial) {
-            console.log("Material is THREE.MeshStandardMaterial");
+            // console.log("Material is THREE.MeshStandardMaterial");
           } else {
-            console.log("Material is not THREE.MeshStandardMaterial");
+            // console.log("Material is not THREE.MeshStandardMaterial");
           }
         }
       });

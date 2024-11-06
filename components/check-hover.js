@@ -74,9 +74,9 @@ AFRAME.registerComponent("check-hover", {
     });
 
     this.el.addEventListener("mouseleave", () => {
+      this.el.components["animation__rotation"].play();
+      this.el.components["animation__position"].play();
       setTimeout(() => {
-        this.el.components["animation__rotation"].play();
-        this.el.components["animation__position"].play();
         this.check_display.emit("start-animation_reverse");
         setTimeout(() => {
           this.check_display.setAttribute("visible", false);
