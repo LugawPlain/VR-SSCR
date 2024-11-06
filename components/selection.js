@@ -3,38 +3,43 @@ AFRAME.registerComponent("selection", {
     this.isMouseDown = false;
     this.isMouseEnter = false;
 
-    const position = this.el.getAttribute("position");
-    this.originalPosition = { x: position.x, y: position.y, z: position.z };
-    const newPositionZ = this.originalPosition.z - 0.1;
+    this.circle = this.el.querySelector("a-circle");
     this.el.addEventListener("mouseenter", () => {
       this.isMouseEnter = true;
       if (!this.isMouseDown) {
-        this.el.setAttribute("material", { opacity: 0.8, color: "orange" });
+        this.circle.setAttribute("visible", true);
+        this.circle.setAttribute("animation", {
+          enabled: true,
+          property: "geometry.radius",
+          from: 0.03,
+          to: 0.05,
+          dur: 500,
+          easing: "easeOutQuad",
+          loop: true,
+        });
+        this.circle.setAttribute("color", "#8c52ff");
       }
-    });
-
-    this.el.addEventListener("mousedown", (event) => {
-      if (event.detail && event.detail.cursorEl) {
-        return;
-      }
-
-      this.isMouseDown = true;
-      this.el.setAttribute("material", { opacity: 0.8, color: "red" });
-
-      this.el.setAttribute("animation", {
-        property: "position",
-        from: `${this.originalPosition.x} ${this.originalPosition.y} ${this.originalPosition.z}`,
-        to: `${this.originalPosition.x} ${this.originalPosition.y} ${newPositionZ}`,
-        dur: 200,
-        easing: "easeOutQuad",
-      });
     });
 
     this.el.addEventListener("mouseleave", () => {
       this.isMouseEnter = false;
-      if (!this.isMouseDown) {
-        this.el.setAttribute("material", { opacity: 0.8, color: "white" });
+
+      this.circle.setAttribute("animation", {
+        enabled: false,
+      });
+      this.circle.setAttribute("visible", false);
+    });
+    this.el.addEventListener("mousedown", (event) => {
+      if (event.detail && event.detail.cursorEl) {
+        return;
       }
+      this.isMouseDown = true;
+      this.circle.setAttribute("animation", {
+        enabled: false,
+      });
+      this.circle.setAttribute("visible", true);
+      this.circle.setAttribute("radius", "0.05");
+      this.circle.setAttribute("color", "red");
     });
 
     this.el.addEventListener("mouseup", () => {
@@ -43,17 +48,18 @@ AFRAME.registerComponent("selection", {
       } else {
         return;
       }
-      this.el.setAttribute("material", { opacity: 0.8, color: "orange" });
-
-      this.el.setAttribute("animation", {
-        property: "position",
-        from: `${this.originalPosition.x} ${this.originalPosition.y} ${newPositionZ}`,
-        to: `${this.originalPosition.x} ${this.originalPosition.y} ${this.originalPosition.z}`,
-        dur: 200,
-        easing: "easeOutQuad",
-      });
-      if (!this.isMouseEnter) {
-        this.el.setAttribute("material", { opacity: 0.8, color: "white" });
+      if (this.isMouseEnter) {
+        this.circle.setAttribute("visible", true);
+        this.circle.setAttribute("animation", {
+          enabled: true,
+          property: "geometry.radius",
+          from: 0.03,
+          to: 0.05,
+          dur: 500,
+          easing: "easeOutQuad",
+          loop: true,
+        });
+        this.circle.setAttribute("color", "#8c52ff");
       }
     });
   },

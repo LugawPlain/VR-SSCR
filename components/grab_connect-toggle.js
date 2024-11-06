@@ -44,9 +44,6 @@ AFRAME.registerComponent("grab_connect-toggle", {
       });
       this.circle.setAttribute("visible", true);
       this.circle.setAttribute("radius", "0.03");
-      this.circle.setAttribute("animation", {
-        enabled: false,
-      });
     });
 
     this.el.addEventListener("mouseup", (event) => {

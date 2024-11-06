@@ -37,12 +37,14 @@ AFRAME.registerComponent("logic-gate", {
     this.el.setAttribute("material", {
       color: "white",
       opacity: 1,
+      visible: true,
     });
   },
   onHoverEnd: function () {
     this.el.setAttribute("material", {
       color: "white",
       opacity: 0,
+      visible: false,
     });
   },
 });

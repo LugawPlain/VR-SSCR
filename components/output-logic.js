@@ -19,5 +19,19 @@ AFRAME.registerComponent("output-logic", {
     const output = this.el.querySelector("[output-button]");
 
     output.setAttribute("output-button", "setOutput", input);
+    const inputSphere = inputNodes[0].querySelector("#output_node");
+    if (input) {
+      inputSphere.setAttribute("material", {
+        color: "yellow",
+        emissive: "yellow",
+        emissiveIntensity: 1,
+      });
+    } else {
+      inputSphere.setAttribute("material", {
+        color: "white",
+        emissive: "white",
+        emissiveIntensity: 0,
+      });
+    }
   },
 });

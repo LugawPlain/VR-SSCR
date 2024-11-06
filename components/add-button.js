@@ -14,6 +14,7 @@ AFRAME.registerComponent("add-button", {
       const gate = this.el.querySelector("a-text").getAttribute("value");
       const inputPlate = `
        <a-box
+        shadow="cast:true;receive:false"
         added
         input-logic
         logic-gate
@@ -21,7 +22,7 @@ AFRAME.registerComponent("add-button", {
         dynamic-body
         grabbable
         hoverable
-        material="color: white; wireframe: true; opacity: 0"
+        material="color: white; wireframe: true; opacity: 0;visible:false"
         depth="0.1 "
         height="0.15"
         width="0.28"
@@ -85,6 +86,7 @@ AFRAME.registerComponent("add-button", {
       </a-box>`;
       const notPlate = `
         <a-box
+        shadow="cast:true;receive:false"
         added
         not-logic
         logic-gate
@@ -92,7 +94,7 @@ AFRAME.registerComponent("add-button", {
         dynamic-body
       grabbable
         hoverable
-        material="color: white; wireframe: true;opacity:0"
+        material="color: white; wireframe: true;opacity:0;visible:false"
         depth="0.05"
         height="0.3"
         width="0.6"
@@ -153,14 +155,15 @@ AFRAME.registerComponent("add-button", {
       const orPlate = `
       
         <a-box
-          added
+        shadow="cast:true;receive:false"
+        added
         or-logic
         logic-gate
         class="interactable gates"
         dynamic-body
-     grabbable
+        grabbable
         hoverable
-        material="color: white; wireframe: true;opacity:0"
+        material="color: white; wireframe: true;opacity:0;visible:false"
         depth="0.05"
         height="0.3"
         width="0.6"
@@ -238,6 +241,7 @@ AFRAME.registerComponent("add-button", {
       const andPlate = `
      
       <a-box
+        shadow="cast:true;receive:false"
         added
         and-logic
         logic-gate
@@ -245,7 +249,7 @@ AFRAME.registerComponent("add-button", {
         dynamic-body
        grabbable
         hoverable
-        material="color: white; wireframe: true;opacity:0"
+        material="color: white; wireframe: true;opacity:0;visible:false"
         depth="0.05"
         height="0.3"
         width="0.6"
@@ -323,14 +327,15 @@ AFRAME.registerComponent("add-button", {
       const xorPlate = `
 
       <a-box
+        shadow="cast:true;receive:false"
         added
         xor-logic
         logic-gate
         class="interactable gates"
         dynamic-body
-   grabbable
+        grabbable
         hoverable
-        material="color: white; wireframe: true;opacity:0"
+        material="color: white; wireframe: true;opacity:0;visible:false"
         depth="0.05"
         height="0.3"
         width="0.6"
@@ -398,13 +403,14 @@ AFRAME.registerComponent("add-button", {
       </a-box>`;
       const outputPlate = `
             <a-box
+        shadow="cast:true;receive:false"
         output-logic
         logic-gate
         class="interactable gates"
         dynamic-body
         grabbable
         hoverable
-        material="color: white; wireframe: true; opacity: 0"
+        material="color: white; wireframe: true; opacity: 0;visible:false"
         depth="0.1 "
         height="0.15"
         width="0.28"
@@ -455,7 +461,7 @@ AFRAME.registerComponent("add-button", {
           position="-0.1 0 0"
         >
           <a-text position="-0.5 0 1" rotation="90 0 0" scale="5 5 5 "></a-text>
-          <a-sphere color="white" scale="0.45 0.45 0.45"></a-sphere>
+          <a-sphere id="output_node" color="white" scale="0.45 0.45 0.45"></a-sphere>
         </a-box>
       </a-box>
 `;
