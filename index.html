@@ -51,8 +51,11 @@
       stats-in-vr
       error-handler
       id="scene"
-      physics="driver: local; gravity: -9.8; maxSubSteps: 1; iterations: 1;"
-      shadow="type: pcfsoft; cast: false; receive: false;"
+      physics="driver: local; 
+                  gravity: -9.8; 
+                  maxSubSteps: 2;
+                  fixedTimeStep: 1/60;
+                  iterations: 10;"
     >
       <!-- Camera -->
       <a-camera position="0 1.5 1">
@@ -331,11 +334,10 @@
         scale="0.7 0.5 0.5 "
         position="-2.5 0.8 0.5"
         rotation="0 90 0"
-        shadow="cast:false;receive:false"
       ></a-gltf-model>
       <!-- Table -->
       <a-plane
-        position="0.510 0.83 -2.809"
+        position="0.510 0.8 -2.809"
         rotation="-90 0 0"
         height="4.2"
         width="7.5"
@@ -346,7 +348,6 @@
       </a-plane>
 
       <a-gltf-model
-        shadow="cast:false;receive:true"
         src="#Scifi_Table"
         position="0.5 0.844 -2.8"
         scale="0.7 0.3 0.7"
@@ -367,11 +368,9 @@
         position="3 0.08 0"
         scale="0.3 0.25 0.3"
         rotation="0 0 0"
-        shadow="cast:false"
       >
         <a-box
           opacity="0"
-          shadow="cast:false;receive:false"
           wireframe="true"
           height="0.3"
           width="0.7"
@@ -424,11 +423,9 @@
         position="3 0.080 1.5"
         scale="0.3 0.25 0.3"
         rotation="0 0 0"
-        shadow="cast:false"
       >
         <a-box
           opacity="0"
-          shadow="cast:false;receive:false"
           wireframe="true"
           height="0.15"
           width="0.5"
@@ -481,11 +478,9 @@
         position="3 0.080 3"
         scale="0.3 0.25 0.3"
         rotation="0 0 0"
-        shadow="cast:false"
       >
         <a-box
           opacity="0"
-          shadow="cast:false;receive:false"
           wireframe="true"
           height="0.25"
           width="0.7"
@@ -496,7 +491,6 @@
           class="interactable"
         >
           <a-gltf-model
-            shadow="cast:false;receive:false"
             src="#RPI"
             position="0 -0.15 -0.391"
             rotation="-50 3 58"
@@ -536,7 +530,6 @@
 
       <!-- Logic Gate Object -->
       <a-box
-        shadow="cast:false;receive:false"
         xor-logic
         logic-gate
         class="interactable gates"
@@ -611,7 +604,6 @@
       </a-box>
 
       <a-box
-        shadow="cast:false;receive:false"
         input-logic
         logic-gate
         class="interactable gates"
