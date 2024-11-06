@@ -52,7 +52,7 @@
       error-handler
       id="scene"
       physics="driver: local; gravity: -9.8; maxSubSteps: 1; iterations: 1;"
-      shadow="type: pcfsoft; cast: false; receive: true;"
+      shadow="type: pcfsoft; cast: false; receive: false;"
     >
       <!-- Camera -->
       <a-camera position="0 1.5 1">
@@ -95,7 +95,10 @@
         </a-asset-item>
         <a-asset-item id="Scifi_Table" src="assets/sci-fi_table.glb">
         </a-asset-item>
-        <a-asset-item id="ScifiCorridor" src="assets/Scifi_Corridor.glb">
+        <a-asset-item
+          id="ScifiCorridor"
+          src="assets/Scifi_Corridor_compressed.glb"
+        >
         </a-asset-item>
         <img id="UI" src="assets/UI.png" />
         <img id="GrabbingEnabled" src="assets/Grabbing Enabled.png" />
@@ -328,7 +331,7 @@
         scale="0.7 0.5 0.5 "
         position="-2.5 0.8 0.5"
         rotation="0 90 0"
-        shadow="cast:true;receive:false"
+        shadow="cast:false;receive:false"
       ></a-gltf-model>
       <!-- Table -->
       <a-plane
@@ -343,7 +346,7 @@
       </a-plane>
 
       <a-gltf-model
-        shadow="cast:true;receive:true"
+        shadow="cast:false;receive:true"
         src="#Scifi_Table"
         position="0.5 0.844 -2.8"
         scale="0.7 0.3 0.7"
@@ -364,7 +367,7 @@
         position="3 0.08 0"
         scale="0.3 0.25 0.3"
         rotation="0 0 0"
-        shadow="cast:true"
+        shadow="cast:false"
       >
         <a-box
           opacity="0"
@@ -412,7 +415,7 @@
         <a-light
           type="spot"
           position="0.057 10 0.028"
-          light="angle:15;intensity:0.7;castShadow:true;shadowRadius:8;penumbra:0.2;shadowBias:-0.00001;color:#88c8d7"
+          light="angle:15;intensity:0.7;castShadow:false;shadowRadius:8;penumbra:0.2;shadowBias:-0.00001;color:#88c8d7"
           rotation="-90 0 0"
         ></a-light>
       </a-gltf-model>
@@ -421,7 +424,7 @@
         position="3 0.080 1.5"
         scale="0.3 0.25 0.3"
         rotation="0 0 0"
-        shadow="cast:true"
+        shadow="cast:false"
       >
         <a-box
           opacity="0"
@@ -469,7 +472,7 @@
         <a-light
           type="spot"
           position="0.057 10 0.028"
-          light="angle:15;intensity:0.7;castShadow:true;shadowRadius:8;penumbra:0.2;shadowBias:-0.00001;color:#c1aee5"
+          light="angle:15;intensity:0.7;castShadow:false;shadowRadius:8;penumbra:0.2;shadowBias:-0.00001;color:#c1aee5"
           rotation="-90 0 0"
         ></a-light>
       </a-gltf-model>
@@ -478,7 +481,7 @@
         position="3 0.080 3"
         scale="0.3 0.25 0.3"
         rotation="0 0 0"
-        shadow="cast:true"
+        shadow="cast:false"
       >
         <a-box
           opacity="0"
@@ -493,7 +496,7 @@
           class="interactable"
         >
           <a-gltf-model
-            shadow="cast:true;receive:false"
+            shadow="cast:false;receive:false"
             src="#RPI"
             position="0 -0.15 -0.391"
             rotation="-50 3 58"
@@ -526,14 +529,14 @@
         <a-light
           type="spot"
           position="0.057 10 0.028"
-          light="angle:15;intensity:0.7;castShadow:true;shadowRadius:8;penumbra:0.2;shadowBias:-0.00001;color:#f48686"
+          light="angle:15;intensity:0.7;castShadow:false;shadowRadius:8;penumbra:0.2;shadowBias:-0.00001;color:#f48686"
           rotation="-90 0 0"
         ></a-light>
       </a-gltf-model>
 
       <!-- Logic Gate Object -->
       <a-box
-        shadow="cast:true;receive:false"
+        shadow="cast:false;receive:false"
         xor-logic
         logic-gate
         class="interactable gates"
@@ -608,7 +611,7 @@
       </a-box>
 
       <a-box
-        shadow="cast:true;receive:false"
+        shadow="cast:false;receive:false"
         input-logic
         logic-gate
         class="interactable gates"
