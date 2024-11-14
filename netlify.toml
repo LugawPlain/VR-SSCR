@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/subpage"
+  to = "/subfolder/"
+  status = 200
