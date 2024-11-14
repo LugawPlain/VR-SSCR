@@ -48,7 +48,8 @@
   </head>
   <body>
     <a-scene
-      stats-in-vr
+      stats
+      vr-mode-ui
       error-handler
       id="scene"
       physics="driver: local; 
@@ -90,11 +91,18 @@
         <a-asset-item id="Scifi_Desk" src="assets/scifi_desk.glb">
         </a-asset-item>
         <!-- Scifi Pod by Quaternius -->
-        <a-asset-item id="Scifi_Pod" src="assets/Scifi Pod.glb"> </a-asset-item>
-        <a-asset-item id="RPI" src="assets/raspberry.glb"> </a-asset-item>
-        <a-asset-item id="ESP32" src="assets/esp32.glb"> </a-asset-item>
-        <a-asset-item id="Arduino" src="assets/arduino_uno.glb"> </a-asset-item>
-        <a-asset-item id="Scifi_Control" src="assets/display_terminal.glb">
+        <a-asset-item id="Scifi_Pod" src="assets/Scifi Pod compressed.glb">
+        </a-asset-item>
+        <a-asset-item id="RPI" src="assets/raspberry compressed.glb">
+        </a-asset-item>
+        <a-asset-item id="ESP32" src="assets/esp32 compressed.glb">
+        </a-asset-item>
+        <a-asset-item id="Arduino" src="assets/arduino_uno_-_low_poly.glb">
+        </a-asset-item>
+        <a-asset-item
+          id="Scifi_Control"
+          src="assets/display terminal compressed.glb"
+        >
         </a-asset-item>
         <a-asset-item id="Scifi_Table" src="assets/sci-fi_table.glb">
         </a-asset-item>
@@ -146,20 +154,19 @@
       <!-- Environment -->
 
       <a-entity
-        environment="fog:0.8;preset:japan ;skyType:atmosphere;playarea:1.250;flatShading:true;gridColor:#6b6b6b"
+        environment="fog:0.8;preset:starry ;skyType:atmosphere;playarea:1.250;flatShading:true;gridColor:#6b6b6b"
         environment_component
       ></a-entity>
 
-      <!-- <a-gltf-model
+      <a-gltf-model
         src="#ScifiCorridor"
         position="0 0 -40"
         rotation="0 180 -0.2"
         scale="1 1 1"
         shader="flat"
-        lod="maxLevel: 2; distance: 15, 30"
-      ></a-gltf-model> -->
+      ></a-gltf-model>
       <a-light
-        light="castShadow:false ;shadowRadius:3;shadowBias:-0.001;distance:50"
+        light="castShadow:true ;shadowRadius:3;shadowBias:-0.001;distance:50"
         type="point"
         intensity="0.6"
         position="0 5 -2"
@@ -368,6 +375,7 @@
         position="3 0.08 0"
         scale="0.3 0.25 0.3"
         rotation="0 0 0"
+        shadow="cast:true;receive:true"
       >
         <a-box
           opacity="0"
@@ -383,8 +391,9 @@
           <a-gltf-model
             src="#Arduino"
             position="0 -0.15 0"
-            rotation="-90 180 90"
-            scale="0.8 0.8 0.8"
+            rotation="0 0 0"
+            scale="0.007 0.007 0.007"
+            shadow="cast:true;receive:false"
           >
           </a-gltf-model>
         </a-box>
@@ -414,7 +423,7 @@
         <a-light
           type="spot"
           position="0.057 10 0.028"
-          light="angle:15;intensity:0.7;castShadow:false;shadowRadius:8;penumbra:0.2;shadowBias:-0.00001;color:#88c8d7"
+          light="angle:15;intensity:0.7;castShadow:true;shadowRadius:8;penumbra:0.2;shadowBias:-0.00001;color:#88c8d7"
           rotation="-90 0 0"
         ></a-light>
       </a-gltf-model>
@@ -423,6 +432,7 @@
         position="3 0.080 1.5"
         scale="0.3 0.25 0.3"
         rotation="0 0 0"
+        shadow="cast:true;receive:true"
       >
         <a-box
           opacity="0"
@@ -440,6 +450,7 @@
             position="0 0 0"
             rotation="0 0 0"
             scale="0.4 0.4 0.4"
+            shadow="cast:true;receive:false"
           >
           </a-gltf-model>
         </a-box>
@@ -469,7 +480,7 @@
         <a-light
           type="spot"
           position="0.057 10 0.028"
-          light="angle:15;intensity:0.7;castShadow:false;shadowRadius:8;penumbra:0.2;shadowBias:-0.00001;color:#c1aee5"
+          light="angle:15;intensity:0.7;castShadow:true;shadowRadius:8;penumbra:0.2;shadowBias:-0.00001;color:#c1aee5"
           rotation="-90 0 0"
         ></a-light>
       </a-gltf-model>
@@ -478,6 +489,7 @@
         position="3 0.080 3"
         scale="0.3 0.25 0.3"
         rotation="0 0 0"
+        shadow="cast:true;receive:true"
       >
         <a-box
           opacity="0"
@@ -495,6 +507,7 @@
             position="0 -0.15 -0.391"
             rotation="-50 3 58"
             scale="0.01 0.01 0.01"
+            shadow="cast:true;receive:false"
           >
           </a-gltf-model>
         </a-box>
@@ -523,7 +536,7 @@
         <a-light
           type="spot"
           position="0.057 10 0.028"
-          light="angle:15;intensity:0.7;castShadow:false;shadowRadius:8;penumbra:0.2;shadowBias:-0.00001;color:#f48686"
+          light="angle:15;intensity:0.7;castShadow:true;shadowRadius:8;penumbra:0.2;shadowBias:-0.00001;color:#f48686"
           rotation="-90 0 0"
         ></a-light>
       </a-gltf-model>
