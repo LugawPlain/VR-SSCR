@@ -88,14 +88,14 @@ AFRAME.registerComponent("grab_connect-toggle", {
     const grabtext = this.parentNode.querySelector("#grabbingtext");
     const grabradio = this.parentNode.querySelector("#grabbingradio");
     if (toggle) {
-      context.setAttribute("visible", true);
+      context.setAttribute("material", "visible", true);
       conradio.setAttribute("visible", true);
-      grabtext.setAttribute("visible", false);
+      grabtext.setAttribute("material", false);
       grabradio.setAttribute("visible", false);
     } else {
-      context.setAttribute("visible", false);
+      context.setAttribute("material", "visible", false);
       conradio.setAttribute("visible", false);
-      grabtext.setAttribute("visible", true);
+      grabtext.setAttribute("material", true);
       grabradio.setAttribute("visible", true);
     }
   },
