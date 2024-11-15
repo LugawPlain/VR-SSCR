@@ -86,7 +86,7 @@
     <a-scene
       stats
       webxr="optionalFeatures: hand-tracking, hit-test;"
-      vr-mode-ui="enabled: true; enterVRButton: #VRButton;"
+      vr-mode-ui="enabled: true;  "
       device-orientation-permission-ui="enabled: true"
       error-handler
       id="scene"
@@ -98,6 +98,7 @@
     >
       <!-- Camera -->
       <a-camera
+        id="camera"
         position="0 1.5 0"
         look-controls="magicWindowTrackingEnabled: true; touchEnabled: true; mouseEnabled: true"
         wasd-controls="enabled: true; acceleration: 20"
@@ -749,6 +750,40 @@
           .addEventListener("timeout", function () {
             console.log("Assets timed out");
           });
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const sceneEl = document.querySelector("a-scene");
+        const cameraEl = document.querySelector("#camera");
+
+        sceneEl.addEventListener("enter-vr", () => {
+          // Ensure WASD and look controls are enabled
+          cameraEl.setAttribute("wasd-controls", "enabled", true);
+          cameraEl.setAttribute("look-controls", "enabled", true);
+
+          // Request full-screen when entering VR
+          if (sceneEl.is("vr-mode")) {
+            if (sceneEl.enterVR) {
+              sceneEl.enterVR();
+            }
+          }
+        });
+
+        sceneEl.addEventListener("exit-vr", () => {
+          // Ensure controls remain enabled after exiting VR
+          cameraEl.setAttribute("wasd-controls", "enabled", true);
+          cameraEl.setAttribute("look-controls", "enabled", true);
+        });
+
+        // Set WebXR for VR
+        const renderer = sceneEl.renderer;
+        if (renderer && renderer.xr) {
+          renderer.xr.enabled = true;
+        }
+
+        // Set the size of the renderer for full-screen experience
+        renderer.setSize(window.innerWidth, window.innerHeight);
       });
     </script>
   </body>
