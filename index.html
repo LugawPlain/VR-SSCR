@@ -48,31 +48,6 @@
     <script src="components/output-button.js"></script>
     <script src="components/check-hover.js"></script>
     <script src="components/check-display.js"></script>
-    <script src="./nipplejs.js"></script>
-    <script>
-      var manager = nipplejs.create(options);
-      var options = {
-        zone: Element, // active zone
-        color: String,
-        size: Integer,
-        threshold: Float, // before triggering a directional event
-        fadeTime: Integer, // transition time
-        multitouch: Boolean,
-        maxNumberOfNipples: Number, // when multitouch, what is too many?
-        dataOnly: Boolean, // no dom element whatsoever
-        position: Object, // preset position for 'static' mode
-        mode: String, // 'dynamic', 'static' or 'semi'
-        restJoystick: Boolean | Object, // Re-center joystick on rest state
-        restOpacity: Number, // opacity when not 'dynamic' and rested
-        lockX: Boolean, // only move on the X axis
-        lockY: Boolean, // only move on the Y axis
-        catchDistance: Number, // distance to recycle previous joystick in
-        // 'semi' mode
-        shape: String, // 'circle' or 'square'
-        dynamicPage: Boolean, // Enable if the page has dynamically visible elements
-        follow: Boolean, // Makes the joystick follow the thumbstick
-      };
-    </script>
   </head>
   <body>
     <div id="zone_joystick"></div>
@@ -750,40 +725,6 @@
           .addEventListener("timeout", function () {
             console.log("Assets timed out");
           });
-      });
-    </script>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const sceneEl = document.querySelector("a-scene");
-        const cameraEl = document.querySelector("#camera");
-
-        sceneEl.addEventListener("enter-vr", () => {
-          // Ensure WASD and look controls are enabled
-          cameraEl.setAttribute("wasd-controls", "enabled", true);
-          cameraEl.setAttribute("look-controls", "enabled", true);
-
-          // Request full-screen when entering VR
-          if (sceneEl.is("vr-mode")) {
-            if (sceneEl.enterVR) {
-              sceneEl.enterVR();
-            }
-          }
-        });
-
-        sceneEl.addEventListener("exit-vr", () => {
-          // Ensure controls remain enabled after exiting VR
-          cameraEl.setAttribute("wasd-controls", "enabled", true);
-          cameraEl.setAttribute("look-controls", "enabled", true);
-        });
-
-        // Set WebXR for VR
-        const renderer = sceneEl.renderer;
-        if (renderer && renderer.xr) {
-          renderer.xr.enabled = true;
-        }
-
-        // Set the size of the renderer for full-screen experience
-        renderer.setSize(window.innerWidth, window.innerHeight);
       });
     </script>
   </body>
