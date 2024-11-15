@@ -85,7 +85,9 @@
     </script>
     <a-scene
       stats
-      vr-mode-ui
+      webxr="optionalFeatures: hand-tracking, hit-test;"
+      vr-mode-ui="enabled: true; enterVRButton: #VRButton;"
+      device-orientation-permission-ui="enabled: true"
       error-handler
       id="scene"
       physics="driver: local; 
@@ -95,7 +97,11 @@
                   iterations: 10;"
     >
       <!-- Camera -->
-      <a-camera position="0 1.5 0">
+      <a-camera
+        position="0 1.5 0"
+        look-controls="magicWindowTrackingEnabled: true; touchEnabled: true; mouseEnabled: true"
+        wasd-controls="enabled: true; acceleration: 20"
+      >
         <!-- Cursor -->
         <a-cursor
           raycaster="far: 5; interval: 100; objects: .interactable"
